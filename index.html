@@ -69,6 +69,7 @@ body {
   z-index: 1;
 }
 
+/* NÚT ĐỔI THEME GÓC PHẢI */
 .theme-toggle-btn {
   position: absolute;
   top: 15px;
@@ -107,6 +108,7 @@ h1 {
   margin-bottom: 12px;
 }
 
+/* KHU VỰC THÔNG BÁO ĐIỂM DANH */
 .checkin-banner {
   background: rgba(0, 255, 136, 0.1);
   border: 1px dashed #00ff88;
@@ -130,6 +132,7 @@ h1 {
   font-size: 10px;
 }
 
+/* KHU VỰC TẠO TAB MỤC RIÊNG */
 .tab-navigation {
   display: flex;
   gap: 4px;
@@ -161,6 +164,7 @@ h1 {
   box-shadow: 0 0 10px var(--shadow-glow);
 }
 
+/* NỘI DUNG TỪNG TAB */
 .tab-content {
   display: none;
   animation: fadeIn 0.3s ease-in-out;
@@ -175,6 +179,7 @@ h1 {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* PHẦN 1: RANDOM ACC STYLES */
 .btn-action {
   width: 100%;
   padding: 14px;
@@ -187,9 +192,6 @@ h1 {
   box-shadow: 0 0 15px var(--shadow-glow);
   transition: transform 0.2s;
   color: white;
-  text-decoration: none;
-  display: block;
-  text-align: center;
 }
 
 .btn-action:hover { transform: scale(1.02); }
@@ -199,11 +201,6 @@ h1 {
   box-shadow: none !important;
   cursor: not-allowed !important;
   transform: none !important;
-}
-
-.btn-link4m {
-  background: linear-gradient(45deg, #ff0055, #ff5500);
-  box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
 }
 
 .result {
@@ -239,7 +236,7 @@ h1 {
   font-size: 12px;
 }
 
-#spinsLeft { color: #ff3366; font-weight: bold; }
+#count { color: #00ff88; font-weight: bold; }
 #remaining { color: var(--primary-color); font-weight: bold; }
 #totalVisits { color: #ff9900; font-weight: bold; }
 
@@ -256,6 +253,32 @@ h1 {
   cursor: pointer;
 }
 
+/* PHẦN 2: GAME FLAPPY STYLES */
+.game-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 320px;
+  margin: 0 auto 10px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 15px var(--shadow-glow);
+  background: #2c3e50;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-game {
+  background: linear-gradient(45deg, #ff9900, #ff5500);
+  box-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
+}
+
+/* PHẦN 4: SCRIPT ROBLOX STYLES */
 .script-box {
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid #00ff88;
@@ -293,6 +316,7 @@ h1 {
   padding: 10px;
 }
 
+/* PHẦN 3: DONATE & LIÊN HỆ STYLES */
 .donate-section {
   padding: 12px;
   background: rgba(0, 234, 255, 0.03);
@@ -351,6 +375,7 @@ h1 {
   line-height: 1.4;
 }
 
+/* HIỆU ỨNG THÔNG BÁO TOAST */
 #toast {
   visibility: hidden;
   min-width: 250px;
@@ -382,9 +407,11 @@ h1 {
 
 <body>
 
+<!-- KHUNG THÔNG BÁO TOAST -->
 <div id="toast">✅ Đã sao chép thành công!</div>
 
 <div class="box">
+  <!-- Nút đổi Theme -->
   <button class="theme-toggle-btn" onclick="toggleTheme()">🎨 Đổi Màu</button>
 
   <div class="logo">
@@ -394,36 +421,25 @@ h1 {
   <h1>Vương Hóng Hớt</h1>
   <p class="subtitle">Kênh Game & Chia Sẻ Tài Khoản Miễn Phí</p>
 
+  <!-- ĐIỂM DANH NHẬN QUÀ HẰNG NGÀY -->
   <div class="checkin-banner" id="checkinBox">
     <span id="checkinText">🎁 Điểm danh nhận thêm lượt random mỗi ngày!</span>
     <button class="checkin-btn" id="checkinBtn" onclick="claimDailyCheckin()">Điểm danh</button>
   </div>
 
+  <!-- THANH NÚT BẤM CHUYỂN MỤC (TAB) -->
   <div class="tab-navigation">
     <button class="tab-btn active" onclick="switchTab(event, 'random-tab')">🎁 Random</button>
+    <button class="tab-btn" onclick="switchTab(event, 'game-tab')">🎮 Game</button>
     <button class="tab-btn" onclick="switchTab(event, 'script-tab')">⚡ Script Roblox</button>
     <button class="tab-btn" onclick="switchTab(event, 'contact-tab')">💖 Donate</button>
   </div>
 
   <!-- MỤC 1: RANDOM ACC -->
   <div id="random-tab" class="tab-content active">
-    <!-- Nút Bấm Random -->
     <button id="randomBtn" class="btn-action" onclick="randomAcc()">
       🎁 RANDOM ACC NGAY
     </button>
-
-     <div class="tabs">
-    <button class="tab-btn active" onclick="openTab('random-tab')">🎁 Random</button>
-    <button class="tab-btn" onclick="openTab('script-tab')">⚡ Script Roblox</button>
-    <button class="tab-btn" onclick="openTab('donate-tab')">💖 Donate</button>
-    <button class="tab-btn" onclick="openTab('game-tab')">🎮 Game Flappy</button>
-     </div>
-       
-    
-    <!-- Nút Vượt Link4m (Chỉ hiện khi hết lượt) -->
-    <a id="link4mBtn" class="btn-action btn-link4m" style="display: none;" href="#" target="_blank">
-      🚀 ỦNG HỘ VƯƠNG VƯỢT 1 LINK ĐỂ NHẬN 100 LƯỢT NHẬN NHA:((
-    </a>
 
     <div class="result" id="result">
       <p id="user"></p>
@@ -432,19 +448,29 @@ h1 {
     </div>
 
     <div class="stats-container">
-      <div>🎫 Lượt lượt còn: <span id="spinsLeft">0</span></div>
-      <div>📦 Kho acc: <span id="remaining">0</span></div>
+      <div>🎯 Đã bấm: <span id="count">0</span></div>
+      <div>📦 Còn: <span id="remaining">0</span></div>
       <div>🌐 Lượt ghé: <span id="totalVisits">1</span></div>
     </div>
 
     <button class="reset-btn" onclick="resetData()">🔄 Nạp lại kho acc ban đầu</button>
   </div>
 
-  <!-- MỤC 2: SCRIPT ROBLOX FIX LAG -->
+  <!-- MỤC 2: MINI GAME FLAPPY VƯƠNG -->
+  <div id="game-tab" class="tab-content">
+    <div class="game-container">
+      <canvas id="birdGame" width="320" height="320"></canvas>
+    </div>
+    <button class="btn-action btn-game" onclick="resetFlappy()">🎮 CHƠI LẠI FLAPPY VƯƠNG</button>
+    <p style="font-size: 11px; color: #aaa; margin-top: 8px;">💡 Chạm màn hình điện thoại hoặc bấm Space trên máy tính để nhảy.</p>
+  </div>
+
+  <!-- MỤC 4: SCRIPT ROBLOX FIX LAG -->
   <div id="script-tab" class="tab-content">
     <div class="script-box">
       <div class="script-title">⚡ Script Fix Lag Roblox (By Vương)</div>
-      <p class="script-code" id="scriptText">loadstring(game:HttpGet("https://gist.githubusercontent.com/vuongdeptrai90/d8a390207eb2f1394590347eaf2772c0/raw/6605c6a2c5344662025fcb8d6f1498e419359ecb/vuonghonghot09.lua"))()</p>
+      <p class="script-code" id="scriptText">loadstring(game:HttpGet("https://gist.githubusercontent.com/vuongdeptrai90/d8a390207eb2f1394590347eaf2772c0/raw/6605c6a2c5344662025fcb8d6f1498e419359ecb/vuonghonghot09.lua"))()
+      </p>
     </div>
     <button class="btn-action btn-script" onclick="copyScript()">📋 COPY SCRIPT FIX LAG</button>
     <p style="font-size: 11px; color: #aaa; margin-top: 10px;">💡 Dán đoạn script này vào Executor của bạn để tối ưu hóa trải nghiệm chơi game Roblox mượt mà hơn.</p>
@@ -457,25 +483,6 @@ h1 {
       <div class="donate-desc">Ủng Hộ Vương Em 1 Ly Cà Phê !</div>
       <img src="https://i.ibb.co/hJZHDY1X/qrme.jpg" alt="QR ZaloPay" class="qr-img" onerror="this.src='https://via.placeholder.com/40'">
     </div>
-       <div class="tabs">
-    <button class="tab-btn active" onclick="openTab('random-tab')">🎁 Random</button>
-    <button class="tab-btn" onclick="openTab('script-tab')">⚡ Script Roblox</button>
-    <button class="tab-btn" onclick="openTab('donate-tab')">💖 Donate</button>
-
-            <!-- MỤC GAME FLAPPY VƯƠNG -->
-<div id="game-tab" class="tab-content" style="display: none;">
-    <div style="text-align: center;">
-        <canvas id="flappyCanvas" width="320" height="480" style="border: 2px solid #00f2fe; border-radius: 12px; background: #111; max-width: 100%;"></canvas>
-        <div style="margin-top: 10px;">
-            <button class="btn-action" onclick="startFlappyGame()">🎮 Chơi lại / Bắt đầu</button>
-        </div>
-    </div>
-</div>
-            
-    <!-- Thêm dòng này bên dưới nút Donate -->
-    <button class="tab-btn" onclick="openTab('game-tab')">🎮 Game Flappy</button>
-       </div>
-       
 
     <div class="social-links">
       <a href="https://youtube.com/@vuonghothot?si=X_A8s2qco4FYY1TW" target="_blank" class="social-btn youtube">
@@ -491,18 +498,14 @@ h1 {
         <img src="https://i.ibb.co/TM2LFpZh/images-1790179452462.png" alt="Discord" style="width: 20px; height: 20px; object-fit: contain;"> Tham Gia Server Discord Vương Hóng Hớt 
       </a>
     </div>
+    
   </div>
 
   <p class="notice-text">📢 Tài khoản được phát miễn phí tùy may mắn, admin không nhận hoặc hỗ trợ lấy lại acc đâu nhé!</p>
 </div>
 
 <script>
-/* ==================== CÀI ĐẶT CONFIG ==================== */
-// 🔗 ĐIỀN LINK RÚT GỌN LINK4M CỦA BẠN VÀO ĐÂY (Nối link trang web của bạn kèm tham số ?verify=link4m vào Link4M)
-const LINK4M_URL = "https://link4m.org/xhCHb"; 
-const DAILY_FREE_SPINS = 1; // Số lượt random miễn phí được làm mới sau 24h
-
-/* ==================== SOUND SYSTEM ==================== */
+/* ==================== ÂM THANH TRÌNH DUYỆT (WEB AUDIO API) ==================== */
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 function playSound(type) {
   if (!audioCtx) return;
@@ -523,9 +526,17 @@ function playSound(type) {
     gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
     osc.start();
     osc.stop(audioCtx.currentTime + 0.15);
+  } else if (type === 'hit') {
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+    osc.frequency.linearRampToValueAtTime(50, audioCtx.currentTime + 0.2);
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.2);
   }
 }
 
+/* ==================== TÍNH NĂNG THEME VÀ THỐNG KÊ ==================== */
 function toggleTheme() {
   playSound('click');
   document.body.classList.toggle("theme-purple");
@@ -536,51 +547,18 @@ if(localStorage.getItem("theme") === "purple") {
   document.body.classList.add("theme-purple");
 }
 
+// Đếm lượt truy cập chung
 let totalVisits = Number(localStorage.getItem("totalVisits")) || 120;
 totalVisits++;
 localStorage.setItem("totalVisits", totalVisits);
 document.getElementById("totalVisits").innerText = totalVisits;
-
-/* ==================== QUẢN LÝ LƯỢT & RESET 24H ==================== */
-let spinsLeft = 0;
-
-function initSpins() {
-  let lastReset = localStorage.getItem("lastSpinReset");
-  let now = new Date().getTime();
-  let savedSpins = localStorage.getItem("spinsLeft");
-
-  // Reset nếu quá 24h (24 * 60 * 60 * 1000 ms) hoặc là lần đầu truy cập
-  if (!lastReset || (now - Number(lastReset)) >= 86400000) {
-    spinsLeft = DAILY_FREE_SPINS;
-    localStorage.setItem("spinsLeft", spinsLeft);
-    localStorage.setItem("lastSpinReset", now);
-  } else {
-    spinsLeft = savedSpins !== null ? Number(savedSpins) : DAILY_FREE_SPINS;
-  }
-}
-
-/* ==================== XỬ LÝ NHIỆM VỤ VƯỢT LINK4M ==================== */
-function checkVerifyCallback() {
-  let urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('verify') === 'link4m') {
-    spinsLeft += 100; // Cộng 1 lượt sau khi hoàn thành vượt link
-    localStorage.setItem("spinsLeft", spinsLeft);
-    showToast("🎉 Xác nhận thành công! Bạn nhận được +100 lượt random!");
-    
-    // Xóa query parameter khỏi URL cho đẹp
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-}
-
-initSpins();
-checkVerifyCallback();
 
 /* ==================== ĐIỂM DANH HẰNG NGÀY ==================== */
 function checkDailyCheckinStatus() {
   let lastCheckin = localStorage.getItem("lastCheckinDate");
   let today = new Date().toDateString();
   if (lastCheckin === today) {
-    document.getElementById("checkinText").innerText = "✅ Hôm nay bạn đã điểm danh rồi!";
+    document.getElementById("checkinText").innerText = "✅ Hôm nay bạn đã điểm danh nhận quà rồi!";
     document.getElementById("checkinBtn").style.display = "none";
   }
 }
@@ -588,23 +566,22 @@ function claimDailyCheckin() {
   playSound('success');
   let today = new Date().toDateString();
   localStorage.setItem("lastCheckinDate", today);
-  spinsLeft += 1;
-  localStorage.setItem("spinsLeft", spinsLeft);
-  showToast("🎉 Điểm danh thành công! Bạn nhận thêm +1 lượt random!");
+  showToast("🎉 Điểm danh thành công! Bạn nhận được thêm may mắn hôm nay!");
   checkDailyCheckinStatus();
-  updateUI();
 }
 checkDailyCheckinStatus();
 
+/* ==================== HÀM HIỆN THÔNG BÁO TOAST ==================== */
 function showToast(message) {
   let toast = document.getElementById("toast");
   toast.innerText = message;
   toast.className = "show";
   setTimeout(function(){ 
     toast.className = toast.className.replace("show", ""); 
-  }, 3000);
+  }, 2500);
 }
 
+/* ==================== CHỨC NĂNG CHUYỂN TAB ==================== */
 function switchTab(evt, tabId) {
   playSound('click');
   let contents = document.getElementsByClassName("tab-content");
@@ -621,205 +598,1397 @@ function switchTab(evt, tabId) {
   evt.currentTarget.classList.add("active");
 }
 
-/* ==================== KHO ACC ==================== */
+/* ==================== PHẦN 1: RANDOM ACC ==================== */
 const defaultAccounts = [
   {user:"Shin2xx2", pass:"123456789az"},
   {user:"tranmychau4x", pass:"1100110a"},
   {user:"bestpro08", pass:"9630621q"},
-  {user:"mudamudawrys", pass:"kocomk123"}
+  {user:"mudamudawrys", pass:"kocomk123"},
+  {user:"yinumber1", pass:"0981921745kito"},
+  {user:"peterbao123456", pass:"vumanhtung2004"},
+  {user:"accviplq27343", pass:"Thoidol1011"},
+  {user:"diepta111", pass:"s22111998"},
+  {user:"tieuhaini", pass:"thuan2000"},
+  {user:"Samset52", pass:"kien0919232110"},
+  {user:"Sieucodons1", pass:"Zxcvbnm123"},
+  {user:"t3u0a0n3", pass:"T01627618090"},
+  {user:"hanghjhi", pass:"hang03032003"},
+  {user:"ccquang36", pass:"anhem36@"},
+  {user:"Nhp0355", pass:"nhp03552006"},
+  {user:"wer0015xx", pass:"minhquan123"},
+  {user:"tuangolathe", pass:"01669114162vn"},
+  {user:"bingao2k8", pass:"bingao123"},
+  {user:"VCLcanhet222333", pass:"son05112007"},
+  {user:"Phuc64647", pass:"12345678j"},
+  {user:"Tunglienminh666", pass:"tunglienminh666"},
+  {user:"Rdnn07", pass:"nguyenvanvu2005"},
+  {user:"ToNyNguyen-than", pass:"123zo23zo"},
+  {user:"tangbao37", pass:"bopbop123"},
+  {user:"thuan0927080149", pass:"Tien234508"},
+  {user:"joeexe@mli.com", pass:"q0912514370"},
+  {user:"Uthuynh103", pass:"ut1234567"},
+  {user:"mind2601", pass:"Hisondey1305@"},
+  {user:"macoi113", pass:"dang21312"},
+  {user:"dankom123vip", pass:"dancom123vip"},
+  {user:"tandi1008", pass:"Thanh24@"},
+  {user:"quangkendy03", pass:"vuongdinhquang03"},
+  {user:"tuan01082005", pass:"tuan182005"},
+  {user:"Lucvancuong247", pass:"lucvancuong427"},
+  {user:"7a1_12345", pass:"01699605632a"},
+  {user:"doantri114", pass:"tri23092019"},
+  {user:"thienpl99", pass:"son2kpltn"},
+  {user:"00haitran00", pass:"kenken123"},
+  {user:"linhnghi201299", pass:"linhnghi99"},
+  {user:"quanghanh14oo", pass:"hanhphuc2005"},
+  {user:"huydzproxyz", pass:"gameloz2004"},
+  {user:"nhunam15", pass:"Cantat15"},
+  {user:"dattanthuy10", pass:"0358858929D"},
+  {user:"chauminhquan2006@gmail.com", pass:"quanaz09950"},
+  {user:"a0865560018", pass:"0865560018a"},
+  {user:"0398961321q", pass:"taoyeumay2345678"},
+  {user:"nhocgaminh2", pass:"0903964857asd"},
+  {user:"hoagogo12345", pass:"hoadeptrai12345"},
+  {user:"ngunguoila123", pass:"123456789s"},
+  {user:"tungpy2110", pass:"Tung21101999"},
+  {user:"mr.buongsung", pass:"bnm12345"},
+  {user:"jackiegunny", pass:"diencongchua1904"},
+  {user:"01883499524a", pass:"thanhtruc3004"},
+  {user:"phungvn123b", pass:"tenksnb1234b"},
+  {user:"nguyenminhphu162@gmail.com", pass:"Minhphu_9102008"},
+  {user:"trumacso1ytb", pass:"VOMINHSANG@1"},
+  {user:"banhiehieu", pass:"hieuton123"},
+  {user:"quamkun158", pass:"Quanyeuquan"},
+  {user:"tranngan04", pass:"dkm123456"},
+  {user:"hoangechjav", pass:"Hoangson2021"},
+  {user:"locvung_memory", pass:"truongvu220488"},
+  {user:"hvip1997", pass:"bestmid1997"},
+  {user:"quyentttq", pass:"quyen1az"},
+  {user:"qthais060403", pass:"Thais06042003@"},
+  {user:"dhdbdjsbs", pass:"6bap6c0a"},
+  {user:"bababababybaby", pass:"hauvip123"},
+  {user:"minat2004", pass:"anhanhanh123"},
+  {user:"Huongnghien2412", pass:"Huongut2412"},
+  {user:"hieubombo1234", pass:"mkhieu9a45"},
+  {user:"maitamnhu2006", pass:"Chipro@2006"},
+  {user:"nvkhoevca", pass:"duycan19"},
+  {user:"khangvetmang", pass:"kiet13042007"},
+  {user:"lapduy28082003", pass:"thinhdeptrai12"},
+  {user:"hitoshawa", pass:"anhpro29102004"},
+  {user:"Yloganlop8a5", pass:"logan12345"},
+  {user:"Datbanhvkl1", pass:"Datbanhvkl1"},
+  {user:"swatichi123", pass:"hihi123456"},
+  {user:"banhbao2000", pass:"850959zz"},
+  {user:"Khuong31102004", pass:"0835636198khuong"},
+  {user:"Manhchap2019az", pass:"Ngochan123a@"},
+  {user:"dat6a26102008", pass:"Thanhtam2509"},
+  {user:"son12345cc", pass:"phamvuduy2004"},
+  {user:"vcdgametv100298", pass:"Son112233@%"},
+  {user:"hoangxuyen2005", pass:"xuyen1609"},
+  {user:"phuong_vi13", pass:"Tuan1990"},
+  {user:"Chanelthanh1993", pass:"12345678a"},
+  {user:"hahapro1980", pass:"toanpro1"},
+  {user:"hoanganh10a3hbt", pass:"huy-phuong"},
+  {user:"9dchamhoc", pass:"vuathoianh11"},
+  {user:"Phukim0188", pass:"01886494Aa"},
+  {user:"nmtruong06", pass:"truong2003"},
+  {user:"truonghaha0805", pass:"xuantruong8503"},
+  {user:"anhladangnong", pass:"123654az"},
+  {user:"Mgtlight", pass:"Tinhle011205@"},
+  {user:"anhkidinhkebg", pass:"ducanh123"},
+  {user:"Lienminh0186", pass:"anhyeuem159"},
+  {user:"hlmx0026", pass:"21022002TC"},
+  {user:"Doremon5990@gmail.com", pass:"kenz1234"},
+  {user:"22ph02", pass:"phuong22"},
+  {user:"hotboy123vnbn", pass:"huong20021"},
+  {user:"0583144458s", pass:"0583144458ss"},
+  {user:"CumCandy", pass:"VoKim16162004"},
+  {user:"r1992", pass:"Truc1512"},
+  {user:"Ah_quynh", pass:"duyduy123"},
+  {user:"buihongquyen98", pass:"Buihongquyen98"},
+  {user:"zuka26122005", pass:"anhyeuem05"},
+  {user:"trangle150405", pass:"dau071005"},
+  {user:"mcrty12345", pass:"Namnam123"},
+  {user:"Khanglanhi", pass:"Zyan1004@"},
+  {user:"nickrac903", pass:"HoangHai123*"},
+  {user:"vanxd0210", pass:"0398484350chu"},
+  {user:"anhdat1305", pass:"anhdat2018"},
+  {user:"vanquyen2712", pass:"Quyen2712@"},
+  {user:"gamethoimag", pass:"vankhai123"},
+  {user:"Tiredgaming5917", pass:"sumohau20111997"},
+  {user:"Tuan123qp111", pass:"locnoi123"},
+  {user:"lqcongly76459", pass:"Uyen06012008"},
+  {user:"HT25052001", pass:"ht25052001"},
+  {user:"liebs89237", pass:"son123456789"},
+  {user:"bcstotchocac", pass:"phong2016"},
+  {user:"bikony2k6", pass:"tomkony123"},
+  {user:"quoctru2121@gmail.com", pass:"lamlaitudau1"},
+  {user:"giangyy1994", pass:"yygiang1994"},
+  {user:"Policetulc91", pass:"tuyen1991"},
+  {user:"luankk1221@gmail.com", pass:"luankk01"},
+  {user:"phongvdqn2004p", pass:"phongkido04"},
+  {user:"lyhung2003ga", pass:"lyhung2003"},
+  {user:"tranminhduc246", pass:"minhduc11"},
+  {user:"minhtu5A512007", pass:"anhyeuem1035"},
+  {user:"Kullf190", pass:"Kullf190"},
+  {user:"thangdxbn5x", pass:"quangdxbn12345"},
+  {user:"bahaolh", pass:"duynguvcl123"},
+  {user:"bumtran98", pass:"919535Aa"},
+  {user:"hoainam862003", pass:"tranthihoainam86"},
+  {user:"00thaochau", pass:"123456789a"},
+  {user:"Yeuquynh2k4", pass:"anhteo123"},
+  {user:"13082004ha", pass:"chuquynh123"},
+  {user:"tuanlinh0147", pass:"a362510263"},
+  {user:"yaiaij", pass:"asdfghjkl1"},
+  {user:"raztapchoi2008", pass:"lemanhquang208"},
+  {user:"Duyenlinh3333", pass:"@Duyen123"},
+  {user:"trumbocphet12", pass:"123456789az"},
+  {user:"hieu115117", pass:"hieu116116"},
+  {user:"luuthanhtan31", pass:"thanh123"},
+  {user:"Dungdich1A", pass:"rungt123"},
+  {user:"daohoangha2009", pass:"daoha2009"},
+  {user:"nhokutev1vn", pass:"0908879681a"},
+  {user:"saublack", pass:"Z.saublack89"},
+  {user:"haiyedmm", pass:"8t52004t"},
+  {user:"anhhoan888", pass:"vanminh11"},
+  {user:"cauutssfhj", pass:"taoghet123"},
+  {user:"nganhdo2018", pass:"nganhdo2000"},
+  {user:"datfa16456", pass:"datfa1633"},
+  {user:"kemtuoitinhyo", pass:"monkeyhuy2004"},
+  {user:"khanh276ap", pass:"tlv848664"},
+  {user:"dhthanh2001", pass:"tuyen2003"},
+  {user:"giaanh2k90", pass:"concho1234"},
+  {user:"a83327_170", pass:"Nam2009@"},
+  {user:"Rimbmtcaothanh", pass:"jrim123456789"},
+  {user:"anthais", pass:"anthais8"},
+  {user:"KienH1996", pass:"kien2607"},
+  {user:"phamgiaminh17022009@gmail.com", pass:"phamgiaminh2202"},
+  {user:"baobao1t", pass:"123456nk"},
+  {user:"rainbipham", pass:"cuong123"},
+  {user:"dienbaquang01", pass:"987654312z"},
+  {user:"aViEm06", pass:"phucvl99AZ"},
+  {user:"sonvuong01", pass:"bohucno1"},
+  {user:"nabeo2008", pass:"Binhbeo498"},
+  {user:"kenkute111106", pass:"Hoang111106@"},
+  {user:"vietbao2001", pass:"tranthanhmai03"},
+  {user:"datpham558", pass:"cuongpham2003"},
+  {user:"top9thachdauroi", pass:"Esperanza"},
+  {user:"mudmdudn", pass:"lethanhhuy147"},
+  {user:"khanhngoc14789", pass:"thanh0352613936"},
+  {user:"teakey191919", pass:"toanduong2018"},
+  {user:"caoanhhuong", pass:"huong1990"},
+  {user:"Vy....BaBy", pass:"Norman18/7/2009"},
+  {user:"lequibinh696", pass:"az01665038945"},
+  {user:"hatungduong2436@gmail.com", pass:"Hatungduong@2004"},
+  {user:"acctamhuyet112", pass:"hanhphucao12"},
+  {user:"Tuongvy5742", pass:"tuongvy1102"},
+  {user:"annengan2209", pass:"kimngan2209"},
+  {user:"theanhdzvl345", pass:"theanhdzdz23"},
+  {user:"phuong71002", pass:"Phuong710023"},
+  {user:"BentoBoss0808", pass:"bopbi080810"},
+  {user:"Hoangdaurong", pass:"duyhoang95"},
+  {user:"boylovegym9x@gmail.com", pass:"alqeada89"},
+  {user:"chinobonmua", pass:"0342397840a"},
+  {user:"ngochoa2312@gmail.com", pass:"01215886791dat"},
+  {user:"0978795060m", pass:"hieu2001"},
+  {user:"Thuandaica321", pass:"tuanlongl3210"},
+  {user:"gaplamup999", pass:"phuc123456789"},
+  {user:"Kirodin", pass:"zxczxc123"},
+  {user:"phat7adz", pass:"phatvip123"},
+  {user:"Matai2013", pass:"01214571192h"},
+  {user:"sonpce0", pass:"thanhhoa36"},
+  {user:"HiImSon293", pass:"sonsinh293"},
+  {user:"KHANHBUI1601", pass:"UHcQ.npuKebaq3-"},
+  {user:"teo3gac99", pass:"Chuong99."},
+  {user:"Tintin242", pass:"thaolong123"},
+  {user:"mtrungtqt", pass:"huyhuy123"},
+  {user:"tini-yuki", pass:"khongduox123"},
+  {user:"shinn16062003", pass:"Giangnam20122005"},
+  {user:"hungtuong2005", pass:"Tien1234@"},
+  {user:"smiling2304", pass:"Kham-2304"},
+  {user:"hunglinh612", pass:"thanhtu1995"},
+  {user:"badaonhatdoi10", pass:"huyfcx4123"},
+  {user:"NguyenTri-NNT", pass:"tri12345"},
+  {user:"leetrungkh82005", pass:"0899472703Dang1@"},
+  {user:"daituaz", pass:"l0ngdeptr@i"},
+  {user:"hoangtuyeuyen", pass:"Quatpro1"},
+  {user:"dec10th90@gmail.com", pass:"Anhyeuem1"},
+  {user:"vinet678", pass:"yxcvbnm01"},
+  {user:"Matdanh8888", pass:"Avengerstuan"},
+  {user:"nhoksatthu2001", pass:"250902145Az"},
+  {user:"bolulinh", pass:"bongubo123"},
+  {user:"ngotuog", pass:"tuongm1887"},
+  {user:"phamdinhcach", pass:"dong2810"},
+  {user:"levanluyen132", pass:"thanh132"},
+  {user:"doanhka91", pass:"Khanhpro12@"},
+  {user:"YeuHT.96", pass:"Nnt@30496"},
+  {user:"Minhvuong0512", pass:"Minhvuong05122k@"},
+  {user:"haha-noob", pass:"tannguyen1"},
+  {user:"chieubtdkg", pass:"0963602055az"},
+  {user:"fulloffvip44", pass:"wrLwXW4B"},
+  {user:"Monster_2701", pass:"suna2701"},
+  {user:"quanphuquy123", pass:"youaregod456"},
+  {user:"ducngo19", pass:"Ducngo12a"},
+  {user:"lucthanset", pass:"anhluc123"},
+  {user:"ykz1069", pass:"hackaccbanoi2k"},
+  {user:"nthnthace2004", pass:"leephong0908"},
+  {user:"vuniok", pass:"vuni2005"},
+  {user:"chienthanpk01", pass:"nghiep8893"},
+  {user:"miicon123", pass:"mk123456789"},
+  {user:"jendepgai12", pass:"0932769229vn"},
+  {user:"Kingcoong2k7", pass:"thinh230981"},
+  {user:"chuyasua1", pass:"beptrai1"},
+  {user:"sharkhp42005", pass:"Sharkhp4"},
+  {user:"ThaitatiOs9", pass:"Chien@2006"},
+  {user:"laibe0000", pass:"thangchahU123"},
+  {user:"middleonearth33", pass:"Duchannguyen0802"},
+  {user:"Thoi991", pass:"vanthoi010591"},
+  {user:"Con.cu.1235cm", pass:"Thanh2299"},
+  {user:"Duykhoa8989@gmail.com", pass:"13051991a"},
+  {user:"Namop6avp", pass:"Zzichigozz"},
+  {user:"lqmbdvi10909", pass:"anhtigon100@@"},
+  {user:"phongbuong1111", pass:"loz3072005"},
+  {user:"halpst23", pass:"Fgcix2c0"},
+  {user:"ANK76677", pass:"Aa(2007)"},
+  {user:"Khoai-tay456", pass:"khoaitay123"},
+  {user:"Dong_manh2", pass:"hoanhai1234"},
+  {user:"OCNAKROTH", pass:"Kunn3004"},
+  {user:"nguyentphuc2k1", pass:"suaccjzm1"},
+  {user:"ngoc6426T", pass:"JgRKP5jORI"},
+  {user:"Voduybaoaaa", pass:"147147Aa"},
+  {user:"nhieucoi12345", pass:"nhieucoi123456"},
+  {user:"Tuchinguyen1111", pass:"cuong147"},
+  {user:"Phuongnono1", pass:"Phumy@123"},
+  {user:"sss.s563", pass:"nqb210807"},
+  {user:"thammai111", pass:"sangpro123456"},
+  {user:"xuanphongds1601@gmail.com", pass:"XPTP1609"},
+  {user:"becu1111", pass:"thuan1998"},
+  {user:"hanbg123456", pass:"soidem123"},
+  {user:"Minh....2001", pass:"Tienminh2001"},
+  {user:"Methaphetamine1", pass:"teddyam91"},
+  {user:"lyquocdat2k5@gmail.com", pass:"ghsqYyyWgv"},
+  {user:"ngunguoiyolo123", pass:"Ngunguoiyolo123@"},
+  {user:"neighbour2706", pass:"kelanhlung520"},
+  {user:"cangpkaxat", pass:"sonmap123"},
+  {user:"Hovanthuong76", pass:"thuongem113"},
+  {user:"kehuydiet54700", pass:"tienlangcay@03"},
+  {user:"caokhanh0905", pass:"tuankhanh123"},
+  {user:"Tranhoangduylo", pass:"051007duypro"},
+  {user:"tranhuykhoidk93", pass:"dieukhung1"},
+  {user:"nhynguyem123456", pass:"khang123"},
+  {user:"hoanganhbee9", pass:"Thalinh1998"},
+  {user:"nghia241118", pass:"nghia2411"},
+  {user:"bindaunho1234", pass:"az123456789s"},
+  {user:"dnhatthiet", pass:"0914124848lon"},
+  {user:"minhquan979797", pass:"minhquan0907"},
+  {user:"kimdung0898@gmail.com", pass:"heopepa123"},
+  {user:"nhiudellnoi791", pass:"Lehongthien1995"},
+  {user:"Nguyenthuan2416", pass:"Ken16122017@"},
+  {user:"minhdz2411", pass:"tandeptrai2006"},
+  {user:"okvipboy22", pass:"anhduy22"},
+  {user:"azxbcd", pass:"thanh1234"},
+  {user:"sodellj", pass:"trang04102001AZ"},
+  {user:"u146452001", pass:"levanhung123"},
+  {user:"Quangdinhodoi4", pass:"cccc1111"},
+  {user:"trongcanh0000", pass:"Trongcanh2309"},
+  {user:"maiminhdanh00zz", pass:"tvt08092000"},
+  {user:"nokiapa1234", pass:"Concat123"},
+  {user:"nguyennak1987", pass:"195201Bt"},
+  {user:"anhhungclhd", pass:"soimattrang1122"},
+  {user:"Smgpaluluman", pass:"0987654321long"},
+  {user:"An200999", pass:"hung1991"},
+  {user:"fcchodem13", pass:"30441975a"},
+  {user:"hodangtri102", pass:"Hodangtri123456"},
+  {user:"hien18112000", pass:"account1"},
+  {user:"BozuHeo08", pass:"08032007nN"},
+  {user:"hungprogameming", pass:"onepiece1"},
+  {user:"hhhhh7640", pass:"vualienminhcm14"},
+  {user:"vanvang55555", pass:"01214996618Tam"},
+  {user:"Huyxomhai", pass:"trinh3010"},
+  {user:"pphong120508@gmail.com", pass:"Ly120508."},
+  {user:"choivoi656", pass:"ongbocon12345"},
+  {user:"BigHit04", pass:"Thanhtungdo2001@"},
+  {user:"truonghung693@gmail.com", pass:"taobadao2003"},
+  {user:"phap_pro123", pass:"phap0123456"},
+  {user:"bietea777", pass:"ahihi123"},
+  {user:"Ngvanduc1111", pass:"lythusang2004"},
+  {user:"kemchanh24", pass:"Anhtu1234"},
+  {user:"luyahihi", pass:"nhuy0706899512"},
+  {user:"toanvit19071994", pass:"26082003a"},
+  {user:"Aqua9390", pass:"1234567890x"},
+  {user:"ongtolq123", pass:"Truong281199"},
+  {user:"Nhokswat4747", pass:"vkhamham123"},
+  {user:"0101h49", pass:"Kimyen9988@"},
+  {user:"caphenyk4", pass:"Namdn123#"},
+  {user:"Quangthanhdl12", pass:"quangthanh1"},
+  {user:"kakaduong443@gmail.com", pass:"KakA2453"},
+  {user:"PhamMinhNTP2007", pass:"Truongson110153"},
+  {user:"lebaonam2012", pass:"baonam2012"},
+  {user:"0398268708kk", pass:"0398268708kkkk"},
+  {user:"luongvui01", pass:"luongvui12"},
+  {user:"acthan_ma123", pass:"Truong0802@"},
+  {user:"Allainco", pass:"tuan2762011"},
+  {user:"Lamchithanh2208", pass:"chithanh2208"},
+  {user:"Orange.354", pass:"Gaucho2005"},
+  {user:"hettuanchoigame", pass:"ngankhoi68"},
+  {user:"V_hunter96", pass:"Plinh2003@"},
+  {user:"bestcaroi1x1", pass:"240595qq"},
+  {user:"boykkgg4411", pass:"boykkgg123"},
+  {user:"anh_lap_9z", pass:"096407458a"},
+  {user:"LuongVanSangFC", pass:"123456789vg"},
+  {user:"cutothangvip@gmail.com", pass:"Thang178"},
+  {user:"zzchuechconzz", pass:"quan1998"},
+  {user:"Ongbenpro", pass:"hungok909"},
+  {user:"dolaviet2k3", pass:"Vuong195@"},
+  {user:"xac9x_127", pass:"Lehieu2005."},
+  {user:"Darkbruhlmao162", pass:"Nampro35115*"},
+  {user:"Coun1252004", pass:"11032001ok"},
+  {user:"Bright-98", pass:"Thang1998"},
+  {user:"Phong37qhaz", pass:"A3061999"},
+  {user:"Sontrook1994", pass:"thaison1994"},
+  {user:"khactoan5", pass:"HOAN2004"},
+  {user:"chungdy1995", pass:"chungdy95"},
+  {user:"trum-xom-9", pass:"123456789t"},
+  {user:"Doanvanphoo", pass:"anhhoan123"},
+  {user:"lienquan-vip", pass:"Vhung99@"},
+  {user:"tuancd9x", pass:"cutrakhoi1"},
+  {user:"emlafa3", pass:"tuananh2001"},
+  {user:"tai_mc114", pass:"0816417408Az"},
+  {user:"Baokhanhd", pass:"Anhhung230728?"},
+  {user:"beenchimto", pass:"3quatao9"},
+  {user:"toe61828", pass:"c0328234851"},
+  {user:"Friza.542", pass:"24102009Phuc@"},
+  {user:"Danhremax", pass:"0708181611Dd"},
+  {user:"uNam789", pass:"Duong(2010)"},
+  {user:"tphaff572", pass:"phong12345678910"},
+  {user:"tumanu155", pass:"NONEVER12"},
+  {user:"kimsangbum1111", pass:"tuan392004"},
+  {user:"Bocongathe23", pass:"hay123456789"},
+  {user:"nguyenquangdoan128@gmail.com", pass:"quan0983540522"},
+  {user:"minhanhcana", pass:"dwu9l165"},
+  {user:"Chucyen123thua", pass:"chucyen123vao"},
+  {user:"VinhCake", pass:"vinh120509"},
+  {user:"nguyenthkou", pass:"Admin123!@#$%^"},
+  {user:"ATmobilevn", pass:"zxc123456789"},
+  {user:"taminhduc2304", pass:"Minhduc2304"},
+  {user:"yornso12018", pass:"quocanh2003"},
+  {user:"lqmbvp3505", pass:"nickok1234"},
+  {user:"emlabate02", pass:"longvinh37"},
+  {user:"Anhtambkdn", pass:"tamnguyen123"},
+  {user:"leohongso", pass:"chelsea191"},
+  {user:"tamhoang345", pass:"tamhoang123"},
+  {user:"Maophp1", pass:"garena123"},
+  {user:"Babathieu111", pass:"0816449313Tt"},
+  {user:"Batconga686", pass:"bxt12345567"},
+  {user:"lqmbdvni7750", pass:"bt14042009"},
+  {user:"ae241204", pass:"anhhee38"},
+  {user:"long15042002", pass:"quynh12345"},
+  {user:"Quan2003asd", pass:"0978890979asd"},
+  {user:"nowin102", pass:"doanh102"},
+  {user:"luong1230vn", pass:"luong01689116977"},
+  {user:"buikhanh10", pass:"truongdbk1"},
+  {user:"t29012001", pass:"t01668917410"},
+  {user:"Locaoky", pass:"Dat@1234"},
+  {user:"xuanvinh172002", pass:"vinh1/7/2002"},
+  {user:"vandat123580", pass:"Matkhau12@"},
+  {user:"Thucthi1", pass:"anhyeuem09"},
+  {user:"tuyetmuathu01", pass:"minhthuc123"},
+  {user:"Buiquochieu", pass:"Hieubeo2910"},
+  {user:"hoangtybg23", pass:"123456789a"},
+  {user:"tintrongnguye", pass:"trongtin123"},
+  {user:"k_hanhnhi", pass:"vu_nhi2805"},
+  {user:"hoaeapok1", pass:"minhtam10A1"},
+  {user:"phamthibichthi1", pass:"ptbt123St"},
+  {user:"clubdoremonn", pass:"Bao2511$"},
+  {user:"Lykieu28017", pass:"Lythily2801*"},
+  {user:"haglvaslna", pass:"ki565e5h"},
+  {user:"Mr.Tiri", pass:"Songukuc"},
+  {user:"ailamvido", pass:"hung0788915257"},
+  {user:"DUNGdpcm2007", pass:"dung12345"},
+  {user:"ace.vitquay", pass:"khanhhung2k4"},
+  {user:"sangsang119977", pass:"nguyencongduc1"},
+  {user:"vgtchimnho", pass:"vinh1234"},
+  {user:"titdrit12345", pass:"abc123456789"},
+  {user:"dentinh94", pass:"dentinh94"},
+  {user:"anhbk2k1", pass:"a17092001"},
+  {user:"Therapperkiller", pass:"28041998a"},
+  {user:"nhupham719", pass:"Thang719"},
+  {user:"khunglonggavn", pass:"thai01885254737"},
+  {user:"Danganhvan0700", pass:"Danganhvan007@"},
+  {user:"sin_103", pass:"cunsaysanh102"},
+  {user:"trungdung9797", pass:"1trungdung1"},
+  {user:"nguyenhoaibill", pass:"Thoigian09"},
+  {user:"Yasuocdv2015", pass:"0971739317quy"},
+  {user:"kietprodk789", pass:"huutinh2k3"},
+  {user:"sirkenypham", pass:"01682208441a"},
+  {user:"fuhlen2001", pass:"vinhcon456"},
+  {user:"Huuvu2302", pass:"23022003Vip"},
+  {user:"hoangtungdn", pass:"hoangkhonglo1"},
+  {user:"quay2806", pass:"1732003taivip"},
+  {user:"rdlq66a1365", pass:"Tquyen113"},
+  {user:"cuongadhpasd", pass:"01679380620a"},
+  {user:"abuonquaz", pass:"123456789a"},
+  {user:"hung0983906aa", pass:"anhthien96"},
+  {user:"teamhay111", pass:"hung123456"},
+  {user:"baolinhuhu", pass:"Linh@23082008"},
+  {user:"Kimngan27081991", pass:"Trunghieu1"},
+  {user:"vuhuuloz2134", pass:"Ha@123456789"},
+  {user:"thichbangtru_13", pass:"13012008mc"},
+  {user:"Aquafina1123", pass:"tuanlong123"},
+  {user:"lovankien0147", pass:"lovankien2003"},
+  {user:"longturet", pass:"23022005@@"},
+  {user:"duytrancute7", pass:"11xxaaee"},
+  {user:"vobannhan1107@gmail.com", pass:"vannhoho2000"},
+  {user:"hl090909", pass:"linhkenny567"},
+  {user:"cudat_20", pass:"240695ad"},
+  {user:"tuandz1698", pass:"tuanmy16"},
+  {user:"Khanh892007", pass:"thangkute123"},
+  {user:"hoangtuananhabc", pass:"Trungduc1997"},
+  {user:"nhockillerxxx", pass:"phamhoaivu93"},
+  {user:"long2010dz@gmail.com", pass:"123456789a"},
+  {user:"hungsieuvippro1", pass:"28112011hung"},
+  {user:"Acclq2068", pass:"das01866818256"},
+  {user:"Duyhung26012001", pass:"hoang2003"},
+  {user:"phuclongdich003", pass:"tuananh123qw"},
+  {user:"duyngong11", pass:"s2sniper"},
+  {user:"topsv246", pass:"@Dat0397555332"},
+  {user:"khanggaming465", pass:"trung1996"},
+  {user:"thang16021997", pass:"0972066129cf"},
+  {user:"ko-vip", pass:"Yeumy6<35"},
+  {user:"best-xinh", pass:"Vip121212@"},
+  {user:"autosp5826", pass:"iopiop00"},
+  {user:"phucarb2004", pass:"duyheo890"},
+  {user:"Skinssvip38", pass:"19101192vc"},
+  {user:"nhu11122011", pass:"11122011hihi"},
+  {user:"donnguyen1981", pass:"0905111281don"},
+  {user:"tranhpro1", pass:"Giong2002@"},
+  {user:"ahugxl123", pass:"thailovesuong2"},
+  {user:"malongduanhe", pass:"phuc2005"},
+  {user:"hayquen1nguoi97", pass:"0939384336chotai"},
+  {user:"maplun1108", pass:"dungmap09431"},
+  {user:"GPL.333", pass:"long2003"},
+  {user:"xnxx.comtop", pass:"a0000000000"},
+  {user:"tunghieuem3", pass:"garen55cdl"},
+  {user:"tungkon32y", pass:"Hong1995"},
+  {user:"iwvsksi", pass:"123456hop"},
+  {user:"cunhocbuzzsock8", pass:"nguyen123"},
+  {user:"phanviet170793", pass:"Batcong1@"},
+  {user:"phong130675", pass:"Quocphong230810@"},
+  {user:"llgundamoosky@gmail.com", pass:"Khanh2928@"},
+  {user:"nghiatbcm123456", pass:"tai155623"},
+  {user:"pkpkngu6", pass:"phanvandong2"},
+  {user:"co123saro", pass:"KhiemPNT581"},
+  {user:"LOLtapchoi", pass:"fifa3tapchoi"},
+  {user:"Chronosdelta01@gmail.com", pass:"thatda555"},
+  {user:"vuloi1234", pass:"nguyenki123"},
+  {user:"Thongzt112", pass:"Cuong@710345"},
+  {user:"Huy132357", pass:"rin123456"},
+  {user:"cailonheo0101", pass:"p123456789"},
+  {user:"ngotronglam99", pass:"lam123456789"},
+  {user:"aezuka2006", pass:"27052006tr"},
+  {user:"toanboy17vip", pass:"0968525546toan"},
+  {user:"khoimy369ok", pass:"codon123"},
+  {user:"caophonvip", pass:"huy021457"},
+  {user:"19001508110i", pass:"sontnt12345"},
+  {user:"tuong000.vn", pass:"Dkhang@2024"},
+  {user:"caichuong", pass:"tantai12"},
+  {user:"nguyenhuyx11", pass:"huynatnaT11"},
+  {user:"7tegtrang87", pass:"12345thanh"},
+  {user:"rdlq68cc3101", pass:"123456789gon"},
+  {user:"subiin1208", pass:"Duyhuynh1"},
+  {user:"Taimatday1234", pass:"Nguthichet1"},
+  {user:"Khayen1009", pass:"chitai007"},
+  {user:"haikuliboy9x", pass:"hien2004"},
+  {user:"Sanghensome", pass:"sang2006"},
+  {user:"chip_nho_ga", pass:"khanhnhi1"},
+  {user:"buianhkhoa051110@gmail.com", pass:"Khoa05112010"},
+  {user:"baoan9042011", pass:"Letrantandan"},
+  {user:"Viendakplao", pass:"kavien123"},
+  {user:"cunchanno2003", pass:"huyluc2003"},
+  {user:"HieDayy", pass:"Huonggiang_1401"},
+  {user:"nhutminh0605", pass:"Quyen2004."},
+  {user:"kenlatao72", pass:"viet07062001"},
+  {user:"toan2k2ne", pass:"toan2020"},
+  {user:"ghethumua34", pass:"matkhau99134"},
+  {user:"chatsd_tq3", pass:"gHxix9NGEES4!2f"},
+  {user:"ductuanpro345", pass:"Tuanpro345"},
+  {user:"hothikimloan135@gmail.com", pass:"lamphong123"},
+  {user:"trandoanh2019", pass:"trandoanh2003"},
+  {user:"vantam19031998", pass:"Nguyentambn98"},
+  {user:"Mithoang99", pass:"trongga123"},
+  {user:"Huubac2486", pass:"huylui123"},
+  {user:"Nhangoden123", pass:"conga97x"},
+  {user:"yg567u", pass:"chuot123"},
+  {user:"S2oowoos2", pass:"bkbambooso33"},
+  {user:"hieumen357", pass:"truong2k4"},
+  {user:"nguyenminhmatic", pass:"tongmonbex0"},
+  {user:"afk00e", pass:"v000000000"},
+  {user:"toiyeudoi132", pass:"toitrangdoi132"},
+  {user:"msm...sora", pass:"agtmj2015"},
+  {user:"cuti98463", pass:"tommy250207"},
+  {user:"Phanthevy123", pass:"01228524034Aa"},
+  {user:"FGTv.DevidFake", pass:"Thien2008."},
+  {user:"phongcuhu9", pass:"2525132576412asd"},
+  {user:"acclq68a654", pass:"anhtoan22"},
+  {user:"Nguyenvinh241ga", pass:"NhociuYtram_2510"},
+  {user:"Anhthutp190", pass:"anhthubg1990"},
+  {user:"ngotdangg", pass:"Ut25031997"},
+  {user:"Bin02.99", pass:"01679232671hk"},
+  {user:"Bevycutenhatne", pass:"NkmclNhl(2k5)"},
+  {user:"tinh15988", pass:"a01259556199"},
+  {user:"BaoPhamGia222", pass:"baodz222"},
+  {user:"thuahoaia0305", pass:"thuahoaia0305"},
+  {user:"anhtoanabfc123", pass:"Tinh123@"},
+  {user:"khoan45", pass:"tri0336574831"},
+  {user:"eyicid1@gmail.com", pass:"Thanh2003"},
+  {user:"maukinhgiang", pass:"thuan123"},
+  {user:"Anhyen0394", pass:"28031994A"},
+  {user:"hopa1999", pass:"Khanhproq4"},
+  {user:"nnsonnn", pass:"sonnnson123"},
+  {user:"tkienqwertyuiop", pass:"kien01202208878"},
+  {user:"Zata.No.Pro.X", pass:"Hoangnek0905@"},
+  {user:"Luanga2525", pass:"66504484a"},
+  {user:"cctaone2580", pass:"0372718583Tran."},
+  {user:"gakamo05", pass:"anhhung36"},
+  {user:"rinosteal", pass:"0976584471a"},
+  {user:"Tuanqp112", pass:"01238971699t"},
+  {user:"hfjka22230", pass:"@Giahuy2008"},
+  {user:"emzuca0000", pass:"01664247850Ss"},
+  {user:"Namxl55", pass:"01642707667a"},
+  {user:"khachau2007", pass:"cuongjack2k7"},
+  {user:"quangtrung02512", pass:"trung2512"},
+  {user:"heomap1808", pass:"aimy132008"},
+  {user:"tuan2005tuan2", pass:"anhtuan1234"},
+  {user:"caonguyen1003", pass:"@Yeuchituyet1"},
+  {user:"metopg", pass:"Huy24092008"},
+  {user:"banbecc77", pass:"@@@1234@@@"},
+  {user:"juimbya2k2", pass:"12345678mk"},
+  {user:"Cutaotols2001", pass:"truongls19092001"},
+  {user:"newreg.18", pass:"A123456b"},
+  {user:"hirogito", pass:"tucaoson123"},
+  {user:"Typham555", pass:"ti01654774279"},
+  {user:"Sunganxin", pass:"Tuyen061101"},
+  {user:"maiban69", pass:"1234567t"},
+  {user:"NguyenSaya", pass:"Moi9999@"},
+  {user:"phuchaucmcf1997", pass:"01236947339za"},
+  {user:"quang252525quan", pass:"DAT01866849332"},
+  {user:"metvon07", pass:"bonbeo77"},
+  {user:"Tn488180@gmail.com", pass:"Tn488180#"},
+  {user:"opa2019", pass:"trung22222"},
+  {user:"detam123123", pass:"daisuhuynh1"},
+  {user:"phonglbtv", pass:"Phong202020"},
+  {user:"u12345y78", pass:"tin12345"},
+  {user:"Huutai940", pass:"hainam2009"},
+  {user:"teamlienquan01", pass:"10072006az"},
+  {user:"ngnhung998", pass:"Abcd1234"},
+  {user:"cuongbuivk", pass:"nhi0035cf"},
+  {user:"tuanbetna", pass:"01868923861a"},
+  {user:"Hungdung120219", pass:"quan120995"},
+  {user:"NTT28022006", pass:"diemkun98@"},
+  {user:"tien123lklh", pass:"2452009khang"},
+  {user:"duonglinh9870", pass:"duonglinh123"},
+  {user:"NMQ2010A", pass:"hieu112010"},
+  {user:"fullzo108", pass:"Cocaiconca.123"},
+  {user:"1raulang", pass:"namnam123"},
+  {user:"thanhkhiem2k4", pass:"kakalo123456"},
+  {user:"LKG0902", pass:"#leankhang134680"},
+  {user:"tuyen123hl", pass:"123456789a"},
+  {user:"sunsetglowno4", pass:"thohai123"},
+  {user:"bthhungg", pass:"buihung01"},
+  {user:"luanpie03@gmail.com", pass:"0347541749Piee"},
+  {user:"VIPCAPHENY", pass:"CAPHENY444"},
+  {user:"poykuy2006", pass:"Poykuy2006"},
+  {user:"ngomanhtuan9292@gmail.com", pass:"01675744602a"},
+  {user:"trieu0507", pass:"trieu0903541312"},
+  {user:"ktrang441", pass:"ktrang441"},
+  {user:"babobim1234", pass:"Bichbanh17"},
+  {user:"mi.ten.hai", pass:"hai17122005"},
+  {user:"Zedlol2612", pass:"dhcuber05"},
+  {user:"xongctbbv", pass:"Thanhhieu93"},
+  {user:"langtu0311", pass:"thuyvy0311"},
+  {user:"Quaydn2017", pass:"Anhyeuem1"},
+  {user:"kimthithi1991", pass:"LeduyStt01"},
+  {user:"linhluong2210@gmail.com", pass:"lpnlinh2210"},
+  {user:"daoanhok77", pass:"Anh2013@"},
+  {user:"Babyunun", pass:"Huykhung918"},
+  {user:"Ngulamhi10", pass:"phuong333"},
+  {user:"Yemhong2018", pass:"Nangnang3232"},
+  {user:"xlminhtien", pass:"the20042004"},
+  {user:"Thanhphong1998p", pass:"thanhphong1999"},
+  {user:"tanhanam9x123", pass:"anhtuan1234"},
+  {user:"doanduy1995", pass:"Lienquanshop@1"},
+  {user:"Lehung1352000", pass:"Hungtrang1711"},
+  {user:"lqmb2v627", pass:"HOA01865710102"},
+  {user:"H2_S04", pass:"lothevan123"},
+  {user:"cailol31528", pass:"Lleeaa31528"},
+  {user:"vu121212", pass:"a01204982871"},
+  {user:"titeo999hs", pass:"tuanga37"},
+  {user:"ti2016ss", pass:"01667637863cuong"},
+  {user:"cubua205", pass:"condimemay205"},
+  {user:"skilldragon123", pass:"frankham123"},
+  {user:"hermit123a", pass:"tan12345"},
+  {user:"muncake321", pass:"longcong9689@@"},
+  {user:"bkrong789@gmail.com", pass:"0388212470Hy4@"},
+  {user:"luanloveyou10", pass:"luanloveyou1"},
+  {user:"khanhlocnguyen1", pass:"bontao0biet"},
+  {user:"Kumanthongg", pass:"01227416118aA"},
+  {user:"Lamnong2007", pass:"levandu19102001"},
+  {user:"TTHCSBP_vip", pass:"nhudaubuoi123"},
+  {user:"tuilabit741", pass:"0913165851As"},
+  {user:"athanhnek@gmail.com", pass:"thanhdola999"},
+  {user:"lemanhplm", pass:"lemanh2004"},
+  {user:"meosieunhan8", pass:"taeyang2"},
+  {user:"trung10a5vl", pass:"trung12a5vl"},
+  {user:"dajgjachandax2", pass:"01626665329Qwe"},
+  {user:"Homanhnhenh", pass:"21082005@Linh"},
+  {user:"BLviblack", pass:"1QAZZAQ1"},
+  {user:"victories211", pass:"trunghoa123"},
+  {user:"huuha68", pass:"hangochuu2003"},
+  {user:"Accviplq3343", pass:"Tanphat2020@@"},
+  {user:"1dieu1102", pass:"C01689255136"},
+  {user:"p3tieuvy114", pass:"khanh1998"},
+  {user:"0985255410x", pass:"vietanh9x"},
+  {user:"huyyeuquynh", pass:"huy14011996"},
+  {user:"hauvpo2011", pass:"lienminh123"},
+  {user:"Aytnnnl", pass:"taoyeumay1"},
+  {user:"tinyeutien2017", pass:"Thuyvy1511"},
+  {user:"Peden016", pass:"123456789z"},
+  {user:"quyen.cu1999", pass:"dkmvl100"},
+  {user:"rin2580456", pass:"rin2580456"},
+  {user:"yeejthojxwb", pass:"yeejthojxwb1"},
+  {user:"Tmy2612.joru", pass:"wozjoru26122802"},
+  {user:"Danhlim110", pass:"tkvliem11097"},
+  {user:"maiphuong175", pass:"lenghia0903"},
+  {user:"dat280629", pass:"dat280629"},
+  {user:"quoccony2009", pass:"quoccony2009"},
+  {user:"boldking", pass:"anhgiang1"},
+  {user:"tuantinhta0", pass:"tuannguyen55"},
+  {user:"humxam1023", pass:"Vietanh1998@"},
+  {user:"truongpham2907", pass:"truong2907"},
+  {user:"Xuyen090890", pass:"xuyen090890"},
+  {user:"tongkhalinh", pass:"linh862002"},
+  {user:"duongda06", pass:"duongda06101994"},
+  {user:"lovantung123321", pass:"vinh2004"},
+  {user:"loltrau125", pass:"Thang123"},
+  {user:"hvquyen5", pass:"huaquyen1"},
+  {user:"quoctan148383", pass:"nguyenducbo234"},
+  {user:"ducdoan999", pass:"20032003a"},
+  {user:"datnungcac123", pass:"MiMi1708"},
+  {user:"vuodinhcdinh22e@gmail.com", pass:"an972004"},
+  {user:"hanchuc2018", pass:"hanchuc2018"},
+  {user:"Son.online12345", pass:"Son.222333444"},
+  {user:"hieumt19952020", pass:"Hieu1995@@"},
+  {user:"duyvipkkl", pass:"duy01102005"},
+  {user:"anhlaquang2k1", pass:"D123456789"},
+  {user:"NakrothBede2.00", pass:"12345678ab"},
+  {user:"Nhii1122", pass:"01275552839dang"},
+  {user:"hiep12e3", pass:"hiep20041"},
+  {user:"t-haru444", pass:"Teahung2004"},
+  {user:"nhiii.12", pass:"23022001nb321"},
+  {user:"gghhggdydyd", pass:"1638zabao"},
+  {user:"mmgomp", pass:"dinhquoc2302"},
+  {user:"phanoanh2k5", pass:"inbox1ss"},
+  {user:"nakvethanchxny", pass:"ptimny56565679"},
+  {user:"ace123baby", pass:"rockmanX789"},
+  {user:"trieutrang95", pass:"chieng2k"},
+  {user:"mrlinhver1", pass:"linh1993"},
+  {user:"huyenthoaity77", pass:"dongocty@@"},
+  {user:"LeVanSuu232009", pass:"LeVanSuu"},
+  {user:"buivankhanh098", pass:"truong1997"},
+  {user:"minhduc280299", pass:"Tranminhduc1"},
+  {user:"phuc80201", pass:"AZphuc802"},
+  {user:"Decoduocem", pass:"0946918264phuong"},
+  {user:"anlun132", pass:"an582004"},
+  {user:"hienhaitra_09", pass:"hienhaitra98"},
+  {user:"0944878825a", pass:"0944878825a"},
+  {user:"chicoj", pass:"2107dung"},
+  {user:"Khiemhp89", pass:"huy123456"},
+  {user:"namsilvernga", pass:"123456789a"},
+  {user:"meongokg", pass:"tynkok1303"},
+  {user:"huy2003tn123", pass:"Loncho123"},
+  {user:"zatuanv31f", pass:"kocanbiet1"},
+  {user:"hung997uy", pass:"occhokm1"},
+  {user:"quang_dung2506", pass:"@Minh123456"},
+  {user:"khetang12345", pass:"khetang54321"},
+  {user:"phucpro749@gmail.com", pass:"0915135600nguyen"},
+  {user:"tanjirodietquy", pass:"animehay123"},
+  {user:"thanhquan131295", pass:"thanhquan131295"},
+  {user:"kenkendz123", pass:"xuantrong123"},
+  {user:"nhozz09", pass:"nhozz123"},
+  {user:"kely_FiFa", pass:"sasuke5349"},
+  {user:"Asunaunderworld", pass:"hung6688"},
+  {user:"quan11102009", pass:"phuc140598"},
+  {user:"anhprolovengoc", pass:"quocviet150907"},
+  {user:"mdc97", pass:"a01663445653159"},
+  {user:"trankyquang234", pass:"123456789l"},
+  {user:"nhoccho3321", pass:"0896404659co"},
+  {user:"giaosuhien2k", pass:"huylun2001"},
+  {user:"hayhohohay223", pass:"duyanhhy123"},
+  {user:"baohihi1235", pass:"susi1236"},
+  {user:"Zkanhtungzk", pass:"lytung123"},
+  {user:"zinprotq14", pass:"tamtq123"},
+  {user:"dhung2004", pass:"vu1234ns"},
+  {user:"tai_ronaldo7", pass:"Sieunhan123"},
+  {user:"Dattrandz", pass:"abcxyz123"},
+  {user:"boisaigon456", pass:"triet123456"},
+  {user:"Hoanglichbk", pass:"kienkien1102"},
+  {user:"sonman16081993", pass:"mint1108"},
+  {user:"thinhcoi1231", pass:"thaihoc113"},
+  {user:"01216857418h", pass:"nguyen13579"},
+  {user:"Accnhucec1", pass:"Hieubaodoi123@"},
+  {user:"danchoi11cute", pass:"zUCGMM8EUO"},
+  {user:"duc150127", pass:"duc150127@"},
+  {user:"L0786914621", pass:"nhoncld12"},
+  {user:"philippnam2005", pass:"quyennguyen2212"},
+  {user:"fl.huanmx", pass:"Huanvp131020039"},
+  {user:"quoclinhhk", pass:"linhhien1234"},
+  {user:"gatremai123", pass:"yamahar15"},
+  {user:"Neoux627", pass:"Thang103@"},
+  {user:"netnetnet2016vn", pass:"01865032634vn"},
+  {user:"pThinhtran11", pass:"Nguyenhoangnhan1"},
+  {user:"vi2008raz", pass:"vi123456789"},
+  {user:"phamngockimphuc", pass:"phuc56789"},
+  {user:"Bbinguyen123", pass:"vanvip123"},
+  {user:"namxeommm", pass:"nam162211"},
+  {user:"thangdzai0999", pass:"hoangthang99"},
+  {user:"sasakk1z", pass:"0924140757thong"},
+  {user:"kohoigi", pass:"chunggau1993"},
+  {user:"Thanhvolam", pass:"minhthanh399"},
+  {user:"regcan.111", pass:"them1landau"},
+  {user:"namspeed2010", pass:"killbill3592054"},
+  {user:"khang0164khang", pass:"123123123k"},
+  {user:"Quanghuong-19", pass:"Daohanh19@"},
+  {user:"phuocgacon0", pass:"Rockkeane01"},
+  {user:"khanglehm.123", pass:"ngoanle123"},
+  {user:"yeutrangvcl22", pass:"thangcuto00"},
+  {user:"coockinggoi", pass:"cuonggo1107"},
+  {user:"ntthfff1410@gmail.com", pass:"thinh1410"},
+  {user:"tiettong", pass:"trieulinh12"},
+  {user:"tuntun188", pass:"dangbui9211"},
+  {user:"Ladykiller509", pass:"Coccoc509"},
+  {user:"spm889", pass:"Huyenmy14"},
+  {user:"phubanlinh", pass:"@@123456789"},
+  {user:"Kilonhi997", pass:"Longvahien@997"},
+  {user:"Baosaigonvn", pass:"suong2002"},
+  {user:"anhsuc2004", pass:"theanh2004"},
+  {user:"becodon0611", pass:"h14226@@@"},
+  {user:"duongdepzai4991", pass:"Duong4991"},
+  {user:"Baocong0", pass:"Aa01658809015"},
+  {user:"nguyenthinh1806", pass:"vanthinh2005"},
+  {user:"gsxnhi6463", pass:"way12345678@"},
+  {user:"Dongaids", pass:"dong3112002"},
+  {user:"ATKquanks", pass:"Minhpubg123"},
+  {user:"dzcogisaizz", pass:"dzsaicaigi123"},
+  {user:"Chuhoang254", pass:"Lathu500@"},
+  {user:"votudi37", pass:"anhnhoemnhieu37"},
+  {user:"Tykhum1200", pass:"01678194959aa"},
+  {user:"namvip200k2", pass:"namvip01"},
+  {user:"dienco9104", pass:"son11111"},
+  {user:"vienpham093", pass:"814160Cong@"},
+  {user:"besstrivenahihi", pass:"f02012002a"},
+  {user:"Huonglmht", pass:"huyyeuhuong123"},
+  {user:"chiyeuminh11223", pass:"kamasucha123"},
+  {user:"Phuocfucker", pass:"minhminhk8"},
+  {user:"trannamart", pass:"truong123456"},
+  {user:"lolnhucac213", pass:"binhpro123"},
+  {user:"hoan2k41412", pass:"tencuatao01"},
+  {user:"nhattanlon", pass:"gagaga123"},
+  {user:"Nvvinh300498@gmail.com", pass:"300498@@Vv"},
+  {user:"lachoapro", pass:"huuloc1994"},
+  {user:"Emgiaroiak", pass:"ba110200ba"},
+  {user:"thanhsatthu2710", pass:"thanh123456789"},
+  {user:"Nick2481036", pass:"anhtinh280795"},
+  {user:"reggau19", pass:"namcony24"},
+  {user:"Khangvoihtn", pass:"laonhi0123"},
+  {user:"nguyentthht", pass:"trung12042007"},
+  {user:"yeejthojxwb", pass:"yeejthojxwb1"},
+  {user:"duykhuong1911", pass:"duykhuong1"},
+  {user:"ht1459", pass:"tai123456789"},
+  {user:"thuyhai31520", pass:"thuyoccho315"},
+  {user:"huonghethan", pass:"Taodeonoi.1"},
+  {user:"lynl1996", pass:"1996lynl"},
+  {user:"phamvanthuan198", pass:"vannhan1"},
+  {user:"acccjvbv", pass:"huynhvan1234"},
+  {user:"hunghe1999", pass:"Hung123456@"},
+  {user:"starminh", pass:"vuthang1996"},
+  {user:"xakutara7890", pass:"Tung070890"},
+  {user:"q01626198365", pass:"quanghitler1004"},
+  {user:"acmila", pass:"Hungthuy.1990"},
+  {user:"lamthephol", pass:"thephol123"},
+  {user:"sonbanhcuon1234", pass:"anhhiep03nd"},
+  {user:"diepphuc2006", pass:"phuc2006"},
+  {user:"accvip33z", pass:"vinhbq2951992"},
+  {user:"chicothang9", pass:"anhzalongoc10"},
+  {user:"Cudangsung2.0", pass:"phong12345"},
+  {user:"Corona992008", pass:"hieusneo9"},
+  {user:"Huong_xu_0104", pass:"huong0104"},
+  {user:"Hieu145315", pass:"hieunguyen1"},
+  {user:"lactranhh", pass:"VIET12345a"},
+  {user:"HaiCongTu2911", pass:"quy25092006"},
+  {user:"Nguyenanh88ht", pass:"nguyenanh520"},
+  {user:"Maiyeucuimia", pass:"tn0966999002"},
+  {user:"Binsupper0123", pass:"binlun0123"},
+  {user:"ZATAxxxRAZ", pass:"Raz12345"},
+  {user:"duongsui305", pass:"Duong@123cxz"},
+  {user:"Quocdan2x", pass:"Quocdan2xx"},
+  {user:"duonglonduong", pass:"duonglon2"},
+  {user:"bang_bmt9xxxx", pass:"Kietphuong2407"},
+  {user:"cudenthui2810", pass:"Truong010321@"},
+  {user:"Thanhtailx30", pass:"01635167963NTT"},
+  {user:"padaoks113", pass:"haicoc6a123"},
+  {user:"trinnhhung", pass:"trinh102002"},
+  {user:"azipok.4", pass:"anhembattu1470"},
+  {user:"Dieptu231292", pass:"dieptu231292"},
+  {user:"Blackcat3by", pass:"anhlavp1991"},
+  {user:"Sonsx2002", pass:"01657811240sx"},
+  {user:"vuthuanthien2001@gmail.com", pass:"Thien2001@"},
+  {user:"nhaho2016as", pass:"buinhattinh113"},
+  {user:"bipt63459@gmail.com", pass:"quang20092110"},
+  {user:"linhpkvp_ruby", pass:"thideothem123"},
+  {user:"u16011991", pass:"vuhaoconha1"},
+  {user:"tamxauxi2000", pass:"13022000q"},
+  {user:"phamtuyeni", pass:"tuyen123456789"},
+  {user:"caveday1245", pass:"vkngaiuem111"},
+  {user:"samlonvaidai123", pass:"levanhung123"},
+  {user:"manh_skip", pass:"Manh@2kk9"},
+  {user:"luumanh207", pass:"anhban12"},
+  {user:"milada17", pass:"mothai34"},
+  {user:"luanfcm", pass:"huyenll1"},
+  {user:"ne03699", pass:"HTht0945679391"},
+  {user:"Hieudaubo37", pass:"koy371995"},
+  {user:"Nguoila2008", pass:"thanhquang1706"},
+  {user:"thuanpro7707", pass:"thanhtuan1"},
+  {user:"bun_bun_bun1237", pass:"Tan@1997"},
+  {user:"nhungsoaica", pass:"thanhliem123"},
+  {user:"Nhokbuipq", pass:"1998@1998"},
+  {user:"ahungxabeng1133", pass:"0932133867h"},
+  {user:"tomm_tayy", pass:"tomtay123"},
+  {user:"truongphuung", pass:"truong2005"},
+  {user:"162yasuo1", pass:"162maiyeuhuyen"},
+  {user:"leecris2", pass:"Azz@@zyk@79"},
+  {user:"pikackuasd", pass:"vuong0905645878"},
+  {user:"namthanphong91", pass:"canhuytap102"},
+  {user:"Votinh899", pass:"Hoai0101@"},
+  {user:"lenzoj3", pass:"vaa32xo%fcj"},
+  {user:"Cuminhtrieu12", pass:"trieu9a6kt"},
+  {user:"Vuhoanghaian157", pass:"rk82x7ka"},
+  {user:"boydzkochim123", pass:"Tanhdz123"},
+  {user:"S2ducvuhps2", pass:"nhudao993"},
+  {user:"vinhcenzo", pass:"vinh30122010"},
+  {user:"abcphuvan2001", pass:"0332506298H"},
+  {user:"phuocro20000", pass:"yeunga2006"},
+  {user:"K2sunni1987", pass:"quyetlop9"},
+  {user:"123quandz1", pass:"Aa0211201@"},
+  {user:"tuonghlubmai", pass:"tushlub@.com"},
+  {user:"zingka1617", pass:"thuong118"},
+  {user:"adkhung1", pass:"01674455457a"},
+  {user:"giangvo1121", pass:"zs1234567"},
+  {user:"An-ki-nay234", pass:"anhmatlon123"},
+  {user:"Hieu12122006", pass:"hieu1212"},
+  {user:"hiitle1997", pass:"0971856971nguyen"},
+  {user:"joogkoonkhhi", pass:"Handsome123"},
+  {user:"HTMIMI", pass:"vanthat91"},
+  {user:"Pronkk", pass:"thang1207"},
+  {user:"Fycraftvn1", pass:"minhhuy877"},
+  {user:"phovn123a", pass:"BoyLanhLung123"},
+  {user:"hieucuksuk@gmail.c", pass:"hieu2005"},
+  {user:"hoangchienmasoi@gmail.com", pass:"anhchienvip99kk2"},
+  {user:"hamsterpro1234", pass:"123456789q"},
+  {user:"12anhyeuemlam12", pass:"nhanyeu227"},
+  {user:"conca10x", pass:"ngochuynh0202"},
+  {user:"sskyboss1", pass:"etyu123Kbma"},
+  {user:"huyzer000", pass:"minhhuy252"},
+  {user:"hieu6e789", pass:"anhhieu123"},
+  {user:"minhquang1gv", pass:"hoimetaoy16"},
+  {user:"duongtuhuynhi", pass:"phucanlon1"},
+  {user:"reg-blue71", pass:"Phong0983185597"},
+  {user:"ManhHaoSoi2006", pass:"Lovanhao2006"},
+  {user:"khoibep11", pass:"ngaoaban11"},
+  {user:"mirgu4165", pass:"10091987Adn"},
+  {user:"Phattai99x", pass:"tanh01656149730"},
+  {user:"jenbum", pass:"Moiyeu1234%"},
+  {user:"kajanaha", pass:"them1landau"},
+  {user:"anhuy29112016", pass:"benhi17102005"},
+  {user:"trunghieumk231", pass:"Wibuneverdie"},
+  {user:"vinh_98qs", pass:"tanvinh1409"},
+  {user:"Lethequang124", pass:"DieuLinh146@"},
+  {user:"hoangbelam1004", pass:"lamvannen1004"},
+  {user:"chimcugay1357", pass:"nguyentuanvu12"},
+  {user:"diepnguyencute2", pass:"Diepnguyen1"},
+  {user:"Pqh1504", pass:"hungcon1504"},
+  {user:"pham_thiet92", pass:"nguyendainghia94"},
+  {user:"Zminh98", pass:"0762138571An@"},
+  {user:"phucvtzc11", pass:"123123az"},
+  {user:"emyeu132109", pass:"Trang2002"},
+  {user:"duc2k2d", pass:"01639405914zz"},
+  {user:"thuan12578", pass:"ngoclinh12"},
+  {user:"bachkim275", pass:"123456Aa"},
+  {user:"taoghetmay26", pass:"taolameo1"},
+  {user:"duy-ka", pass:"suppergor1"},
+  {user:"phu_gl115", pass:"hoanghuy01"},
+  {user:"thequang2k6hy", pass:"buoiemdai12cm"},
+  {user:"Nguyenbaobin203", pass:"18012003bin"},
+  {user:"Mboyhd999", pass:"anhduonghd123"},
+  {user:"ducuyfa", pass:"Hacker123@@"},
+  {user:"lqmbno7778@gmail.com", pass:"hieudz11"},
+  {user:"Daccau2k8", pass:"1234567890As@"},
+  {user:"dong100w", pass:"Dinhlam2002"},
+  {user:"yeumoi10", pass:"anhday1997"},
+  {user:"ncskin.a7", pass:"Bao_le483"},
+  {user:"baorong189", pass:"rongtute01"},
+  {user:"AZ09az09sa", pass:"vansi2002"},
+  {user:"anhtun51", pass:"phamthioanh435"},
+  {user:"Hoahaihuo", pass:"hoa17012002"},
+  {user:"nhokphucvippro", pass:"chichkhongdi11"},
+  {user:"hellotuan2016", pass:"vantuan1"},
+  {user:"Shanks@hooy.com", pass:"thanh1123"},
+  {user:"tienboy1990cute", pass:"hoilamgi123"},
+  {user:"gdjbcdi5", pass:"gaugauem123"},
+  {user:"damthue12345678", pass:"damthue1"},
+  {user:"tuupqbt_03", pass:"01699643732f2"},
+  {user:"minhkhoi211121", pass:"khoitran1234"},
+  {user:"hunghd96x", pass:"hunghd196x"},
+  {user:"thanh05102k1", pass:"thanhdung1"},
+  {user:"becunanha", pass:"a15112002"},
+  {user:"a---z---nono", pass:"vaolmj2202"},
+  {user:"thai01694437325", pass:"trandinhlam02"},
+  {user:"yangyo69", pass:"Phanhuuhoa2004@"},
+  {user:"Duong_250112", pass:"duong250112"},
+  {user:"vudai12800", pass:"namquan2kk7"},
+  {user:"hocthingu12@gmail.com", pass:"xuankute2003"},
+  {user:"anhteu789", pass:"hungnhung37"},
+  {user:"Kephahoai1404", pass:"Lethien1404@"},
+  {user:"t.banhanh", pass:"Matkhaunhucu"},
+  {user:"hai6c_01", pass:"01646853934k"},
+  {user:"quyidol2909", pass:"quenmatkhau1"},
+  {user:"drtansang01257", pass:"nguyentansang114"},
+  {user:"Phutai487", pass:"phutai0987"},
+  {user:"diepvietdan", pass:"Dan31122007"},
+  {user:"camsucmuoi", pass:"matkhau00"},
+  {user:"tuthancm1999", pass:"01269168436a"},
+  {user:"anhduya4123", pass:"phamduy111"},
+  {user:"phuc.vip.per", pass:"0123456789phuc"},
+  {user:"emiuxetang", pass:"Nhoctuanyeuem123"},
+  {user:"Z0376604055z", pass:"ZZ0376604055"},
+  {user:"dung-22-10-2004", pass:"dung-22-10-2004"},
+  {user:"cdtman07", pass:"ThLoVeNh123"},
+  {user:"nguyenvinh0719", pass:"07101999v"},
+  {user:"kalami18", pass:"thetruyen13"},
+  {user:"anhhungasd2002", pass:"01233247097a"},
+  {user:"R9_delima", pass:"Thinh1997"},
+  {user:"vang1904", pass:"vangtran1904"},
+  {user:"duc8b11", pass:"duc0366721005"},
+  {user:"Tionega", pass:"0888400917bin"},
+  {user:"xolokgae2", pass:"0927116370@"},
+  {user:"ngchn52", pass:"top1brightdoiten"},
+  {user:"thaongan016", pass:"gioiyeungan016"},
+  {user:"Vannhieuu0222", pass:"29112002abcd"},
+  {user:"Baosky1907", pass:"ngoclinh1"},
+  {user:"Loaccngon2", pass:"1234vip*@64H#"},
+  {user:"soul-knights", pass:"Nhok210525@"},
+  {user:"allyashi9277", pass:"k123456789"},
+  {user:"mymomminh", pass:"Thuymy1@"},
+  {user:"huuquan005", pass:"huylacho123"},
+  {user:"Nholoncho123", pass:"Asd0386865758"},
+  {user:"thuat111123h", pass:"phongzhou123"},
+  {user:"manhduc4az", pass:"conlaunhe1"},
+  {user:"Sieuphamnm", pass:"Anhyeuem2002"},
+  {user:"hoquangnam09@gmail.com", pass:"nam15032009"},
+  {user:"nguoicodon2k2", pass:"ngucatinh123"},
+  {user:"Emlaai13k", pass:"timemodau123"},
+  {user:"vanlea", pass:"tai12345"},
+  {user:"bao9999zz", pass:"12345678zz"},
+  {user:"trongphat692005", pass:"Phat2005"},
+  {user:"cointroll0218", pass:"0773919230@Khanh"},
+  {user:"Ct.hero", pass:"saolozwadi1"},
+  {user:"huyetma42016", pass:"vubui12345"},
+  {user:"danganhsang1", pass:"minhanh123"},
+  {user:"Lamtrinh195", pass:"kakagioma1"},
+  {user:"Miraik70", pass:"duongnhatquang12"},
+  {user:"auto1x428", pass:"ouzsv1fp"},
+  {user:"nhatxuan971@gmail.com", pass:"huuan1213"},
+  {user:"0979157044t", pass:"18102005t"},
+  {user:"hpct2021", pass:"camtu2021"},
+  {user:"Lamngocbao7", pass:"Ngocbao2007"},
+  {user:"blueskytrieu01", pass:"thuanlavip123"},
+  {user:"Tramphong1988", pass:"Anhbavu123!!!"},
+  {user:"daotrang123", pass:"dainang2509"},
+  {user:"vanthat277", pass:"yennhi2000"},
+  {user:"Thanholyveraz", pass:"Touliver3#"},
+  {user:"lequanpvt@gmail.com", pass:"lmqpvt24"},
+  {user:"hannhocna", pass:"soi123456"},
+  {user:"heroman29614", pass:"ac243626"},
+  {user:"mr_fami", pass:"leprodq12"},
+  {user:"Vtcvcl117117", pass:"kietquy.123"},
+  {user:"nhatkhanggg209", pass:"Quancutovl2010."},
+  {user:"Top1sever-Tau", pass:"xamnach123"},
+  {user:"thaokhu2k4", pass:"Quangteok1"},
+  {user:"khuikhu123", pass:"tintinne2003"},
+  {user:"trungdf555", pass:"01639444205a"},
+  {user:"crossholy1230", pass:"khang1409"},
+  {user:"Atduccuong", pass:"0936310323S"},
+  {user:"hoangvansong01", pass:"hoangvansong02"},
+  {user:"vinh10062006", pass:"vinh1234567890"},
+  {user:"vietcaohvip", pass:"vietcao123"},
+  {user:"thanhtuandz187", pass:"tuandz1872005"},
+  {user:"long2482k", pass:"long2482000"},
+  {user:"afk.pp", pass:"3006123a"},
+  {user:"thangyouti2", pass:"091461qaz"},
+  {user:"sangpk2004", pass:"khanhpk123"},
+  {user:"Phucphon123az", pass:"yeuthuong9xhp"},
+  {user:"nthnth1", pass:"01092003Thanh@"},
+  {user:"hoangxl5", pass:"097381883111dang"},
+  {user:"hoathannb1234", pass:"hoathannb123"},
+  {user:"caovipnlbk", pass:"Tommy20@04"},
+  {user:"phamvinh225", pass:"TRANVANTY2001"},
+  {user:"vaocantat", pass:"namvb1102"},
+  {user:"123xucbot", pass:"banhanh56"},
+  {user:"le543678", pass:"giang999"},
+  {user:"Trungquan2003FA", pass:"nguyengjang95"},
+  {user:"duongngocthai", pass:"Thanh0916969019"},
+  {user:"Pkiachay", pass:"Chuong12072008@"},
+  {user:"nkocly001", pass:"minhhuan01"},
+  {user:"cong140505", pass:"cong2005"},
+  {user:"Huy_Mon", pass:"HuyMon424"},
+  {user:"fb.lamn15222006", pass:"HoaiLam15222006"},
+  {user:"Phuongyumtv2008", pass:"Vthanh1234"},
+  {user:"hacongha123", pass:"anhvip123"},
+  {user:"anhnamcala", pass:"nguyennam98"},
+  {user:"kohaybayacc", pass:"Matkhau11"},
+  {user:"duydat131", pass:"tahuuhoang37"},
+  {user:"chauxinh214", pass:"01657735679chau"},
+  {user:"provips100s", pass:"*kid-1412*"},
+  {user:"ynh321", pass:"vinhk0909383866"},
+  {user:"kino.z7", pass:"30052004Bat$"},
+  {user:"haivip7sao", pass:"haichit9912345"},
+  {user:"honguyendacduy1", pass:"Duylanhho1901"},
+  {user:"zzkotezz27", pass:"myloveisMai"},
+  {user:"hoanghai89a", pass:"hoanghai1"},
+  {user:"Kayenpro1", pass:"Tangocquan1."},
+  {user:"Thaibaodom", pass:"123456789A"},
+  {user:"Ptx1234567", pass:"Thanhcong"},
+  {user:"Tuyen07102001", pass:"nguyenthituyen22"},
+  {user:"Grndh123", pass:"tuananh1801"},
+  {user:"hungtatoanxiro", pass:"hung1234"},
+  {user:"ahuypro123z", pass:"a123456789"},
+  {user:"thanh-123.5", pass:"thanhf1pro"},
+  {user:"Linhnam2018", pass:"123456789vbnm"},
+  {user:"Maduongpho123", pass:"avatar123456789"},
+  {user:"caubebadao02", pass:"mnbvcxz321"},
+  {user:"trngh14", pass:"trong0801"},
+  {user:"ngductria1", pass:"ductria1"},
+  {user:"sangheo0304", pass:"thanhsang0102"},
+  {user:"lephutb", pass:"phuphu123"},
+  {user:"wiliam_kun", pass:"81J3mpnc"},
+  {user:"yeuanhhayanhyeu", pass:"@0914948905"},
+  {user:"gocc147225", pass:"I1d1zh5m"},
+  {user:"phongzzzpro", pass:"xinloiem90"},
+  {user:"0354566367l", pass:"vanh28102008"},
+  {user:"namthe.69", pass:"toilanam97"},
+  {user:"Lienquan1925492", pass:"buiduchanh2001"},
+  {user:"dkdkza8", pass:"minhthien123"},
+  {user:"bacadu123321", pass:"0387117328a"},
+  {user:"Khongsomahaha", pass:"Nhan123@"},
+  {user:"piido2705", pass:"vinhky2008"},
+  {user:"bo30@gmail.com", pass:"vinh3052010"},
+  {user:"Sky.wind.zsm", pass:"Trungthang123@"},
+  {user:"Thuongga2k3", pass:"manhdz7976"},
+  {user:"choredabong45", pass:"hoang062"},
+  {user:"leha2000005z", pass:"123456789z"},
+  {user:"meplop", pass:"a123456789b"},
+  {user:"lyly441993", pass:"Huy12346@@"},
+  {user:"ducga77u", pass:"asdfghjkl150"},
+  {user:"hfgfjgjvng", pass:"shopacc236054@"},
+  {user:"quocvinh-2008", pass:"Az1234567890@"},
+  {user:"CUONG2118", pass:"Nguyentuancuong"},
+  {user:"sangvip14745625", pass:"Sangvip147456"},
+  {user:"khangty1278", pass:"chuhe123"},
+  {user:"Linhnhisshn", pass:"Ln28022022@"},
+  {user:"lekongu", pass:"LEKONGU09032007"},
+  {user:"nakbboysv@gmail.com", pass:"zkpqfm6i"},
+  {user:"Channyyyyy2002", pass:"tuanphan122002@"},
+  {user:"onechamp_2k2", pass:"linh0987654321"},
+  {user:"baokiet133", pass:"baokiet123"},
+  {user:"lhnooo00000", pass:"haona2097"},
+  {user:"fc.doclap", pass:"lethidiep2003"},
+  {user:"shopgameLQ69", pass:"vinh1234"},
+  {user:"TinhCa4004", pass:"T5121977"},
+  {user:"Yeunakrod", pass:"123456aa"},
+  {user:"khangxama852", pass:"Zzz0988733728"},
+  {user:"Vanthai1010", pass:"thai1010"},
+  {user:"Baonekmnui", pass:"Phuctran123?"},
+  {user:"Duanhoai78", pass:"duanhoai2458"},
+  {user:"Namvnzx", pass:"12345qwert"},
+  {user:"buivinh1702", pass:"v17022001"},
+  {user:"hanquocdm02", pass:"dennguyen1"},
+  {user:"haivaquoc123", pass:"tuanboro123"},
+  {user:"Bietdoi1987", pass:"toila1987"},
+  {user:"Duchuynhdepzy", pass:"Duchuynh0368"},
+  {user:"PTB-10l", pass:"buoncuaanh9520"},
+  {user:"dang11082006", pass:"Dang@2006"},
+  {user:"anhdz123kk@gmail.com", pass:"anhdz123kk"},
+  {user:"kiepngheo_1102", pass:"22061996a"},
+  {user:"trang13062005", pass:"trang13062005"},
+  {user:"vinhtukuda9x", pass:"tukuda9x"},
+  {user:"mydreamof2002", pass:"22432645aA@."},
+  {user:"conchobogo123", pass:"112413112413_NPV"},
+  {user:"toanminh.tnn", pass:"22toan22"},
+  {user:"FGtv.hauchoingu", pass:"Thanhnhat09123@"},
+  {user:"Xxvvccbbnn", pass:"0385830313de"},
+  {user:"dungblack009", pass:"manhblack123"},
+  {user:"thanhsao202", pass:"sdt01472583690"},
+  {user:"xindunganem123", pass:"thang8911"},
+  {user:"luvanghoang96", pass:"buiducanh11"},
+  {user:"ba.daovkl", pass:"Haohyccc"},
+  {user:"taolabo_123", pass:"10031998nam"},
+  {user:"cuem06051997", pass:"VANKHANH290601"},
+  {user:"Minhlklk2014", pass:"01267303411asd"},
+  {user:"Gumsenpai", pass:"thangdepzai0000"},
+  {user:"comaixohey2", pass:"19/10/2003"},
+  {user:"acantho", pass:"0967678522aZ"},
+  {user:"Kyvy2k4", pass:"kyVY@240724"},
+  {user:"Kundepzoai2002", pass:"kun30102002"},
+  {user:"dragoncitydong", pass:"tiendung2002"},
+  {user:"daulacden", pass:"trung2311"},
+  {user:"cuong2004nha", pass:"trong2k61842006"},
+  {user:"lamtygame", pass:"tuanlinh98"},
+  {user:"LTB12345113", pass:"LTB12345"},
+  {user:"Callukko", pass:"phongle1205"},
+  {user:"Toandaica2002s", pass:"thuylinh18"},
+  {user:"TOITHIEUTHINH", pass:"truong201"},
+  {user:"dinhvietabc3", pass:"Dinhvietabc3"},
+  {user:"quylienminh2002", pass:"anthao123"},
+  {user:"Shizukabk123", pass:"htaby7677"},
+  {user:"congvipbs2k", pass:"Cong2992k@"},
+  {user:"thanguoc", pass:"0969818876a"},
+  {user:"NNguyenDuyQuang", pass:"phung1123"},
+  {user:"duong0553", pass:"01632043977tan"},
+  {user:"huydensi123", pass:"huydensi123456"},
+  {user:"Hanh0huc90", pass:"Hung16122005@@@@"},
+  {user:"Kietpoilo", pass:"01636027802a"},
+  {user:"cuongkdhb2005", pass:"cuong2005"},
+  {user:"Taijr2603", pass:"huutai00"},
+  {user:"tai0968779137", pass:"uyen0968779137"},
+  {user:"trolldevilnoten", pass:"phucnhu831"},
+  {user:"fayeuem159", pass:"truongdamtho123"},
+  {user:"salillarestor", pass:"bi0923666259pi"},
+  {user:"thehung2404", pass:"!@#dsaasd123"},
+  {user:"Yeuem.194", pass:"cucau102"},
+  {user:"dangcap73H", pass:"chuotmt2005"},
+  {user:"Tunglilac14", pass:"afaffafafa35"},
+  {user:"Nguyenbaokid", pass:"26072002kid"},
+  {user:"linzzzz16", pass:"quangdz123"},
+  {user:"Kietkhlacdtrai", pass:"F5gICa56xk"},
+  {user:"Haihovo9a4", pass:"minhnguyen123"},
+  {user:"tridien_tuanvy", pass:"tridien1992"},
+  {user:"ishisake", pass:"conduylon123"},
+  {user:"vinhdog2019", pass:"thanhpro01983633"},
+  {user:"concu1963", pass:"bang123456789"},
+  {user:"dan-choi-pp", pass:"yeuem123"},
+  {user:"0762262558lan", pass:"nghiacu12345"},
+  {user:"akailyy", pass:"thanh111"},
+  {user:"binh2k2x", pass:"Thinh161196"},
+  {user:"Ngokxl", pass:"long123456"},
+  {user:"anhtrung2510", pass:"trung2000"},
+  {user:"nguyenvancuong1912211@gmail.com", pass:"Tieuthu2711$$"},
+  {user:"maithanhtri0901", pass:"maithanhtri0901"},
+  {user:"Ducquang8300", pass:"langvantung2004"},
+  {user:"QWERcove", pass:"cuong2003"},
+  {user:"lamanhba201", pass:"12345678l"},
+  {user:"trcun1234", pass:"tri119411"},
+  {user:"phuongk6c", pass:"A123456789"}
 ];
 
-let savedAccounts = localStorage.getItem("remainingAccounts");
-let accounts = savedAccounts ? JSON.parse(savedAccounts) : [...defaultAccounts];
-let currentAcc = "";
-let isCooldown = false;
+let accounts = JSON.parse(localStorage.getItem("accounts")) || defaultAccounts;
+let clickCount = Number(localStorage.getItem("clickCount")) || 0;
 
-updateUI();
+document.getElementById("count").innerText = clickCount;
+document.getElementById("remaining").innerText = accounts.length;
 
-function randomAcc(){
-  if (isCooldown) return;
-
-  if (spinsLeft <= 0) {
-    showToast("⚠️ Bạn đã hết lượt random! Vui lòng vượt Link4M để lấy thêm.");
-    updateUI();
-    return;
-  }
-
+function randomAcc() {
   playSound('click');
   if (accounts.length === 0) {
-    showToast("⚠️ Đã hết tài khoản trong hệ thống!");
+    showToast("⚠️ Đã hết tài khoản trong kho! Hãy nạp lại kho.");
+    document.getElementById("randomBtn").disabled = true;
     return;
   }
-  
+
   let randomIndex = Math.floor(Math.random() * accounts.length);
-  let acc = accounts.splice(randomIndex, 1)[0];
+  let acc = accounts[randomIndex];
 
-  document.getElementById("user").innerHTML = "👤 Tài khoản: " + acc.user;
-  document.getElementById("pass").innerHTML = "🔑 Mật khẩu: " + acc.pass;
-  document.getElementById("result").style.display = "block";
+  accounts.splice(randomIndex, 1);
+  localStorage.setItem("accounts", JSON.stringify(accounts));
 
-  currentAcc = "Tài khoản: " + acc.user + "\nMật khẩu: " + acc.pass;
-  
-  spinsLeft--;
-  localStorage.setItem("spinsLeft", spinsLeft);
-  localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
-  updateUI();
+  clickCount++;
+  localStorage.setItem("clickCount", clickCount);
 
-  // Cooldown 5s giữa các lần bấm
-  isCooldown = true;
-  let timeLeft = 5;
-  let btn = document.getElementById("randomBtn");
-  btn.disabled = true;
-  btn.innerText = `⏳ Vui lòng đợi (${timeLeft}s)`;
-
-  let timer = setInterval(function() {
-    timeLeft--;
-    if (timeLeft > 0) {
-      btn.innerText = `⏳ Vui lòng đợi (${timeLeft}s)`;
-    } else {
-      clearInterval(timer);
-      isCooldown = false;
-      updateUI();
-    }
-  }, 1000);
-}
-
-function updateUI() {
-  document.getElementById("spinsLeft").innerText = spinsLeft;
+  document.getElementById("count").innerText = clickCount;
   document.getElementById("remaining").innerText = accounts.length;
 
-  let btnRandom = document.getElementById("randomBtn");
-  let btnLink4m = document.getElementById("link4mBtn");
+  document.getElementById("user").innerText = "👤 TK: " + acc.user;
+  document.getElementById("pass").innerText = "🔑 MK: " + acc.pass;
+  document.getElementById("result").style.display = "block";
 
-  // Thiết lập link4m khi bị ẩn nút random
-  btnLink4m.href = LINK4M_URL;
-
-  if (spinsLeft <= 0) {
-    btnRandom.style.display = "none";
-    btnLink4m.style.display = "block";
-  } else {
-    btnRandom.style.display = "block";
-    btnLink4m.style.display = "none";
-
-    if (!isCooldown) {
-      if (accounts.length === 0) {
-        btnRandom.disabled = true;
-        btnRandom.innerText = "❌ ĐÃ HẾT ACC";
-      } else {
-        btnRandom.disabled = false; 
-        btnRandom.innerText = "🎁 RANDOM ACC NGAY";
-      }
-    }
-  }
+  playSound('success');
 }
 
-function copyAcc(){
-  if (!currentAcc) return;
-  playSound('success');
-  navigator.clipboard.writeText(currentAcc);
-  showToast("✅ Đã sao chép tài khoản thành công!");
+function copyAcc() {
+  playSound('click');
+  let userText = document.getElementById("user").innerText.replace("👤 TK: ", "");
+  let passText = document.getElementById("pass").innerText.replace("🔑 MK: ", "");
+  let fullAcc = userText + "|" + passText;
+
+  navigator.clipboard.writeText(fullAcc).then(() => {
+    showToast("📋 Đã sao chép: " + fullAcc);
+  });
 }
 
 function resetData() {
   playSound('click');
-  if (confirm("Bạn có muốn nạp lại kho acc ban đầu không?")) {
-    accounts = [...defaultAccounts];
-    localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
-    document.getElementById("result").style.display = "none";
-    isCooldown = false;
-    updateUI();
-    showToast("✅ Đã khôi phục lại kho acc!");
-  }
+  localStorage.removeItem("accounts");
+  localStorage.removeItem("clickCount");
+  accounts = [...defaultAccounts];
+  clickCount = 0;
+
+  document.getElementById("count").innerText = 0;
+  document.getElementById("remaining").innerText = accounts.length;
+  document.getElementById("result").style.display = "none";
+  document.getElementById("randomBtn").disabled = false;
+
+  showToast("🔄 Đã nạp lại kho acc ban đầu!");
 }
 
-function copyScript() {
-  playSound('success');
-  let scriptCode = document.getElementById("scriptText").innerText;
-  navigator.clipboard.writeText(scriptCode);
-  showToast("✅ Đã sao chép Script Fix Lag!");
-     const canvas = document.getElementById("flappyCanvas");
-const ctx = canvas ? canvas.getContext("2d") : null;
+/* ==================== PHẦN 2: GAME FLAPPY VƯƠNG ==================== */
+const canvas = document.getElementById("birdGame");
+const ctx = canvas.getContext("2d");
 
-let bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.6, lift: -10, velocity: 0 };
-let pipes = [];
-let frame = 0;
+let birdY = 160;
+let birdVelocity = 0;
+let gravity = 0.35;
+let jump = -6.5;
 let score = 0;
-let gameRunning = false;
+let gameOver = false;
 
-function startFlappyGame() {
-    bird.y = 150;
-    bird.velocity = 0;
-    pipes = [];
-    score = 0;
-    frame = 0;
-    gameRunning = true;
-    loopFlappy();
+let pipes = [];
+let pipeWidth = 40;
+let pipeGap = 100;
+let frame = 0;
+
+function jumpBird() {
+  if (gameOver) {
+    resetFlappy();
+    return;
+  }
+  playSound('click');
+  birdVelocity = jump;
 }
 
-if (canvas) {
-    canvas.addEventListener("click", () => {
-        if (gameRunning) bird.velocity += bird.lift;
-    });
+canvas.addEventListener("click", jumpBird);
+canvas.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  jumpBird();
+}, {passive: false});
+
+document.addEventListener("keydown", function(e) {
+  if (e.code === "Space" && document.getElementById("game-tab").classList.contains("active")) {
+    jumpBird();
+  }
+});
+
+function resetFlappy() {
+  birdY = 160;
+  birdVelocity = 0;
+  score = 0;
+  pipes = [];
+  frame = 0;
+  gameOver = false;
+  loopFlappy();
 }
 
 function loopFlappy() {
-    if (!gameRunning || !ctx) return;
-    
-    // Xóa màn hình
-    ctx.fillStyle = "#1e1e2f";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if (gameOver) return;
 
-    // Xử lý Chim (Vương)
-    bird.velocity += bird.gravity;
-    bird.y += bird.velocity;
-    ctx.fillStyle = "#00f2fe";
-    ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+  ctx.fillStyle = "#2c3e50";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Chạm đất hoặc trần
-    if (bird.y + bird.height >= canvas.height || bird.y <= 0) {
-        gameRunning = false;
-        alert("💥 Game Over! Điểm của bạn: " + score);
+  birdVelocity += gravity;
+  birdY += birdVelocity;
+
+  ctx.fillStyle = "#00eaff";
+  ctx.beginPath();
+  ctx.arc(60, birdY, 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (frame % 90 === 0) {
+    let topHeight = Math.floor(Math.random() * (canvas.height - pipeGap - 60)) + 30;
+    pipes.push({
+      x: canvas.width,
+      top: topHeight,
+      bottom: canvas.height - topHeight - pipeGap,
+      passed: false
+    });
+  }
+
+  for (let i = 0; i < pipes.length; i++) {
+    let p = pipes[i];
+    p.x -= 2;
+
+    ctx.fillStyle = "#00ff88";
+    ctx.fillRect(p.x, 0, pipeWidth, p.top);
+    ctx.fillRect(p.x, canvas.height - p.bottom, pipeWidth, p.bottom);
+
+    if (60 + 10 > p.x && 60 - 10 < p.x + pipeWidth) {
+      if (birdY - 10 < p.top || birdY + 10 > canvas.height - p.bottom) {
+        endGame();
+      }
     }
 
-    // Tạo Cột
-    if (frame % 90 === 0) {
-        let gap = 120;
-        let topHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 30;
-        pipes.push({ x: canvas.width, top: topHeight, bottom: topHeight + gap });
+    if (p.x + pipeWidth < 60 && !p.passed) {
+      p.passed = true;
+      score++;
+      playSound('success');
     }
+  }
 
-    // Di chuyển Cột
-    for (let i = 0; i < pipes.length; i++) {
-        pipes[i].x -= 2;
+  pipes = pipes.filter(p => p.x + pipeWidth > 0);
 
-        ctx.fillStyle = "#4facfe";
-        ctx.fillRect(pipes[i].x, 0, 30, pipes[i].top);
-        ctx.fillRect(pipes[i].x, pipes[i].bottom, 30, canvas.height - pipes[i].bottom);
+  if (birdY + 10 >= canvas.height || birdY - 10 <= 0) {
+    endGame();
+  }
 
-        // Va chạm
-        if (
-            bird.x + bird.width > pipes[i].x &&
-            bird.x < pipes[i].x + 30 &&
-            (bird.y < pipes[i].top || bird.y + bird.height > pipes[i].bottom)
-        ) {
-            gameRunning = false;
-            alert("💥 Game Over! Điểm của bạn: " + score);
-        }
+  ctx.fillStyle = "#fff";
+  ctx.font = "bold 16px Poppins";
+  ctx.fillText("Điểm: " + score, 15, 30);
 
-        if (pipes[i].x === bird.x) score++;
-    }
-
-    // Hiển thị Điểm
-    ctx.fillStyle = "#fff";
-    ctx.font = "18px Arial";
-    ctx.fillText("Điểm: " + score, 15, 30);
-
-    frame++;
-    if (gameRunning) requestAnimationFrame(loopFlappy);
+  frame++;
+  requestAnimationFrame(loopFlappy);
 }
-     
+
+function endGame() {
+  playSound('hit');
+  gameOver = true;
+  ctx.fillStyle = "rgba(0,0,0,0.6)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#ff4757";
+  ctx.font = "bold 20px Poppins";
+  ctx.textAlign = "center";
+  ctx.fillText("GAME OVER!", canvas.width / 2, canvas.height / 2 - 10);
+  ctx.fillStyle = "#fff";
+  ctx.font = "12px Poppins";
+  ctx.fillText("Chạm để chơi lại", canvas.width / 2, canvas.height / 2 + 20);
+  ctx.textAlign = "start";
+}
+
+loopFlappy();
+
+/* ==================== PHẦN 4: SCRIPT ROBLOX ==================== */
+function copyScript() {
+  playSound('click');
+  let scriptText = document.getElementById("scriptText").innerText.trim();
+  navigator.clipboard.writeText(scriptText).then(() => {
+    showToast("📋 Đã sao chép Script Fix Lag!");
+  });
 }
 </script>
+
 </body>
 </html>
-
