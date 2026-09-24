@@ -449,6 +449,25 @@ h1 {
       <div class="donate-desc">Ủng Hộ Vương Em 1 Ly Cà Phê !</div>
       <img src="https://i.ibb.co/hJZHDY1X/qrme.jpg" alt="QR ZaloPay" class="qr-img" onerror="this.src='https://via.placeholder.com/40'">
     </div>
+       <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('random-tab')">🎁 Random</button>
+    <button class="tab-btn" onclick="openTab('script-tab')">⚡ Script Roblox</button>
+    <button class="tab-btn" onclick="openTab('donate-tab')">💖 Donate</button>
+
+            <!-- MỤC GAME FLAPPY VƯƠNG -->
+<div id="game-tab" class="tab-content" style="display: none;">
+    <div style="text-align: center;">
+        <canvas id="flappyCanvas" width="320" height="480" style="border: 2px solid #00f2fe; border-radius: 12px; background: #111; max-width: 100%;"></canvas>
+        <div style="margin-top: 10px;">
+            <button class="btn-action" onclick="startFlappyGame()">🎮 Chơi lại / Bắt đầu</button>
+        </div>
+    </div>
+</div>
+            
+    <!-- Thêm dòng này bên dưới nút Donate -->
+    <button class="tab-btn" onclick="openTab('game-tab')">🎮 Game Flappy</button>
+       </div>
+       
 
     <div class="social-links">
       <a href="https://youtube.com/@vuonghothot?si=X_A8s2qco4FYY1TW" target="_blank" class="social-btn youtube">
@@ -710,7 +729,89 @@ function copyScript() {
   let scriptCode = document.getElementById("scriptText").innerText;
   navigator.clipboard.writeText(scriptCode);
   showToast("✅ Đã sao chép Script Fix Lag!");
+     const canvas = document.getElementById("flappyCanvas");
+const ctx = canvas ? canvas.getContext("2d") : null;
+
+let bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.6, lift: -10, velocity: 0 };
+let pipes = [];
+let frame = 0;
+let score = 0;
+let gameRunning = false;
+
+function startFlappyGame() {
+    bird.y = 150;
+    bird.velocity = 0;
+    pipes = [];
+    score = 0;
+    frame = 0;
+    gameRunning = true;
+    loopFlappy();
+}
+
+if (canvas) {
+    canvas.addEventListener("click", () => {
+        if (gameRunning) bird.velocity += bird.lift;
+    });
+}
+
+function loopFlappy() {
+    if (!gameRunning || !ctx) return;
+    
+    // Xóa màn hình
+    ctx.fillStyle = "#1e1e2f";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Xử lý Chim (Vương)
+    bird.velocity += bird.gravity;
+    bird.y += bird.velocity;
+    ctx.fillStyle = "#00f2fe";
+    ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+
+    // Chạm đất hoặc trần
+    if (bird.y + bird.height >= canvas.height || bird.y <= 0) {
+        gameRunning = false;
+        alert("💥 Game Over! Điểm của bạn: " + score);
+    }
+
+    // Tạo Cột
+    if (frame % 90 === 0) {
+        let gap = 120;
+        let topHeight = Math.floor(Math.random() * (canvas.height - gap - 100)) + 30;
+        pipes.push({ x: canvas.width, top: topHeight, bottom: topHeight + gap });
+    }
+
+    // Di chuyển Cột
+    for (let i = 0; i < pipes.length; i++) {
+        pipes[i].x -= 2;
+
+        ctx.fillStyle = "#4facfe";
+        ctx.fillRect(pipes[i].x, 0, 30, pipes[i].top);
+        ctx.fillRect(pipes[i].x, pipes[i].bottom, 30, canvas.height - pipes[i].bottom);
+
+        // Va chạm
+        if (
+            bird.x + bird.width > pipes[i].x &&
+            bird.x < pipes[i].x + 30 &&
+            (bird.y < pipes[i].top || bird.y + bird.height > pipes[i].bottom)
+        ) {
+            gameRunning = false;
+            alert("💥 Game Over! Điểm của bạn: " + score);
+        }
+
+        if (pipes[i].x === bird.x) score++;
+    }
+
+    // Hiển thị Điểm
+    ctx.fillStyle = "#fff";
+    ctx.font = "18px Arial";
+    ctx.fillText("Điểm: " + score, 15, 30);
+
+    frame++;
+    if (gameRunning) requestAnimationFrame(loopFlappy);
+}
+     
 }
 </script>
 </body>
 </html>
+
