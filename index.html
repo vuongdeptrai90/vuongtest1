@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4368167974738132"
+     crossorigin="anonymous"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2YC194HSCX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2YC194HSCX');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Vương Hóng Hớt - Hub Game & Acc</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-color: #00eaff;
+  --secondary-color: #008cff;
+  --box-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --shadow-glow: rgba(0, 234, 255, 0.2);
+}
+
+body.theme-purple {
+  --primary-color: #d946ef;
+  --secondary-color: #8b5cf6;
+  --shadow-glow: rgba(217, 70, 239, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  color: white;
+  background: linear-gradient(135deg, #030303, #151515, #222);
+  padding: 20px 0;
+}
+
+.box {
+  width: 95%;
+  max-width: 430px;
+  padding: 20px;
+  background: var(--box-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 25px var(--shadow-glow);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.theme-toggle-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  font-size: 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.theme-toggle-btn:hover { background: var(--primary-color); color: #000; }
+
+.logo-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+h1 {
+  margin: 8px 0 2px 0;
+  font-size: 24px;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--primary-color);
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.checkin-banner {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px dashed #00ff88;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  color: #00ff88;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checkin-btn {
+  background: #00ff88;
+  color: #000;
+  border: none;
+  padding: 4px 8px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 8px 2px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0;
+  box-shadow: none;
+}
+
+.tab-btn.active {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-action {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--shadow-glow);
+  transition: transform 0.2s;
+  color: white;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.btn-action:hover { transform: scale(1.02); }
+.btn-action:active { transform: scale(0.98); }
+.btn-action:disabled {
+  background: #555 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.btn-link4m {
+  background: linear-gradient(45deg, #ff0055, #ff5500);
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+}
+
+.result {
+  display: none;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--primary-color);
+}
+
+.result p {
+  background: #111;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  word-break: break-all;
+  margin: 8px 0;
+}
+
+.copy {
+  background: linear-gradient(45deg, #00ff88, #00cc55);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+}
+
+.stats-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+#spinsLeft { color: #ff3366; font-weight: bold; }
+#remaining { color: var(--primary-color); font-weight: bold; }
+#totalVisits { color: #ff9900; font-weight: bold; }
+
+.reset-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #aaa;
+  font-size: 12px;
+  padding: 6px 12px;
+  margin-top: 12px;
+  box-shadow: none;
+  width: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.script-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #00ff88;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.script-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #00ff88;
+  margin-bottom: 6px;
+}
+
+.script-code {
+  background: #111;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--primary-color);
+  word-break: break-all;
+  font-family: monospace;
+  max-height: 90px;
+  overflow-y: auto;
+  margin: 0 0 10px 0;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.btn-script {
+  background: linear-gradient(45deg, #00ff88, #00cc55);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  font-size: 13px;
+  padding: 10px;
+}
+
+.donate-section {
+  padding: 12px;
+  background: rgba(0, 234, 255, 0.03);
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 15px;
+}
+
+.donate-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #00ff88;
+  margin-bottom: 5px;
+}
+
+.donate-desc {
+  font-size: 11px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.qr-img {
+  width: 140px;
+  border-radius: 10px;
+  border: 2px solid var(--primary-color);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  transition: transform 0.2s;
+}
+
+.social-btn.youtube { background: linear-gradient(45deg, #ff0000, #cc0000); color: white; }
+.social-btn.tiktok { background: linear-gradient(45deg, #00f2fe, #4facfe); color: #000; }
+.social-btn.gmail { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
+.social-btn.discord { background: linear-gradient(45deg, #5865F2, #4752C4); color: white; }
+
+.notice-text {
+  font-size: 11px;
+  color: #888;
+  margin-top: 15px;
+  line-height: 1.4;
+}
+
+#toast {
+  visibility: hidden;
+  min-width: 250px;
+  background: rgba(15, 15, 15, 0.95);
+  color: #fff;
+  text-align: center;
+  border-radius: 12px;
+  padding: 12px 20px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%) translateY(50px);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #00ff88;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<div id="toast">✅ Đã sao chép thành công!</div>
+
+<div class="box">
+  <button class="theme-toggle-btn" onclick="toggleTheme()">🎨 Đổi Màu</button>
+
+  <div class="logo">
+    <img src="https://i.ibb.co/GDpKs3F/logo.jpg" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80'">
+  </div>
+
+  <h1>Vương Hóng Hớt</h1>
+  <p class="subtitle">Kênh Game & Chia Sẻ Tài Khoản Miễn Phí</p>
+
+  <div class="checkin-banner" id="checkinBox">
+    <span id="checkinText">🎁 Điểm danh nhận thêm lượt random mỗi ngày!</span>
+    <button class="checkin-btn" id="checkinBtn" onclick="claimDailyCheckin()">Điểm danh</button>
+  </div>
+
+  <div class="tab-navigation">
+    <button class="tab-btn active" onclick="switchTab(event, 'random-tab')">🎁 Random</button>
+    <button class="tab-btn" onclick="switchTab(event, 'script-tab')">⚡ Script Roblox</button>
+    <button class="tab-btn" onclick="switchTab(event, 'contact-tab')">💖 Donate</button>
+  </div>
+
+  <!-- MỤC 1: RANDOM ACC -->
+  <div id="random-tab" class="tab-content active">
+    <!-- Nút Bấm Random -->
+    <button id="randomBtn" class="btn-action" onclick="randomAcc()">
+      🎁 RANDOM ACC NGAY
+    </button>
+    
+    <!-- Nút Vượt Link4m (Chỉ hiện khi hết lượt) -->
+    <a id="link4mBtn" class="btn-action btn-link4m" style="display: none;" href="#" target="_blank">
+      🚀 VƯỢT LINK4M ĐỂ NHẬN LƯỢT RANDOM
+    </a>
+
+    <div class="result" id="result">
+      <p id="user"></p>
+      <p id="pass"></p>
+      <button class="btn-action copy" onclick="copyAcc()">📋 COPY ACC</button>
+    </div>
+
+    <div class="stats-container">
+      <div>🎫 Lượt lượt còn: <span id="spinsLeft">0</span></div>
+      <div>📦 Kho acc: <span id="remaining">0</span></div>
+      <div>🌐 Lượt ghé: <span id="totalVisits">1</span></div>
+    </div>
+
+    <button class="reset-btn" onclick="resetData()">🔄 Nạp lại kho acc ban đầu</button>
+  </div>
+
+  <!-- MỤC 2: SCRIPT ROBLOX FIX LAG -->
+  <div id="script-tab" class="tab-content">
+    <div class="script-box">
+      <div class="script-title">⚡ Script Fix Lag Roblox (By Vương)</div>
+      <p class="script-code" id="scriptText">loadstring(game:HttpGet("https://gist.githubusercontent.com/vuongdeptrai90/d8a390207eb2f1394590347eaf2772c0/raw/6605c6a2c5344662025fcb8d6f1498e419359ecb/vuonghonghot09.lua"))()</p>
+    </div>
+    <button class="btn-action btn-script" onclick="copyScript()">📋 COPY SCRIPT FIX LAG</button>
+    <p style="font-size: 11px; color: #aaa; margin-top: 10px;">💡 Dán đoạn script này vào Executor của bạn để tối ưu hóa trải nghiệm chơi game Roblox mượt mà hơn.</p>
+  </div>
+
+  <!-- MỤC 3: DONATE & LIÊN HỆ -->
+  <div id="contact-tab" class="tab-content">
+    <div class="donate-section">
+      <div class="donate-title">💖 Ủng Hộ / Donate Cho Kênh</div>
+      <div class="donate-desc">Ủng Hộ Vương Em 1 Ly Cà Phê !</div>
+      <img src="https://i.ibb.co/hJZHDY1X/qrme.jpg" alt="QR ZaloPay" class="qr-img" onerror="this.src='https://via.placeholder.com/40'">
+    </div>
+
+    <div class="social-links">
+      <a href="https://youtube.com/@vuonghothot?si=X_A8s2qco4FYY1TW" target="_blank" class="social-btn youtube">
+        <img src="https://i.ibb.co/prfwLZFM/Youtube-logo.png" alt="YouTube" style="width: 20px; height: 20px; object-fit: contain;"> Đăng Ký YouTube Vương Hóng Hớt
+      </a>
+      <a href="https://www.tiktok.com/@vuong_120309" target="_blank" class="social-btn tiktok">
+        <img src="https://i.ibb.co/KjrSVhfR/images-1790179472774.jpg" alt="TikTok" style="width: 20px; height: 20px; object-fit: contain;"> Follow TikTok @vuong_120309
+      </a>
+      <a href="mailto:nguyenquocvuong02004@gmail.com" class="social-btn gmail">
+        <img src="https://i.ibb.co/ZRWNGkNL/images-1790180141148.jpg" alt="Gmail" style="width: 20px; height: 20px; object-fit: contain;"> Gmail: nguyenquocvuong02004@gmail.com
+      </a>
+      <a href="https://discord.gg/WZyXwF6v" target="_blank" class="social-btn discord">
+        <img src="https://i.ibb.co/TM2LFpZh/images-1790179452462.png" alt="Discord" style="width: 20px; height: 20px; object-fit: contain;"> Tham Gia Server Discord Vương Hóng Hớt 
+      </a>
+    </div>
+  </div>
+
+  <p class="notice-text">📢 Tài khoản được phát miễn phí tùy may mắn, admin không nhận hoặc hỗ trợ lấy lại acc đâu nhé!</p>
+</div>
+
+<script>
+/* ==================== CÀI ĐẶT CONFIG ==================== */
+// 🔗 ĐIỀN LINK RÚT GỌN LINK4M CỦA BẠN VÀO ĐÂY (Nối link trang web của bạn kèm tham số ?verify=link4m vào Link4M)
+const LINK4M_URL = "https://link4m.co/your_short_link"; 
+const DAILY_FREE_SPINS = 1; // Số lượt random miễn phí được làm mới sau 24h
+
+/* ==================== SOUND SYSTEM ==================== */
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(type) {
+  if (!audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  let osc = audioCtx.createOscillator();
+  let gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  if (type === 'click') {
+    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.05);
+  } else if (type === 'success') {
+    osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.15);
+  }
+}
+
+function toggleTheme() {
+  playSound('click');
+  document.body.classList.toggle("theme-purple");
+  let isPurple = document.body.classList.contains("theme-purple");
+  localStorage.setItem("theme", isPurple ? "purple" : "cyan");
+}
+if(localStorage.getItem("theme") === "purple") {
+  document.body.classList.add("theme-purple");
+}
+
+let totalVisits = Number(localStorage.getItem("totalVisits")) || 120;
+totalVisits++;
+localStorage.setItem("totalVisits", totalVisits);
+document.getElementById("totalVisits").innerText = totalVisits;
+
+/* ==================== QUẢN LÝ LƯỢT & RESET 24H ==================== */
+let spinsLeft = 0;
+
+function initSpins() {
+  let lastReset = localStorage.getItem("lastSpinReset");
+  let now = new Date().getTime();
+  let savedSpins = localStorage.getItem("spinsLeft");
+
+  // Reset nếu quá 24h (24 * 60 * 60 * 1000 ms) hoặc là lần đầu truy cập
+  if (!lastReset || (now - Number(lastReset)) >= 86400000) {
+    spinsLeft = DAILY_FREE_SPINS;
+    localStorage.setItem("spinsLeft", spinsLeft);
+    localStorage.setItem("lastSpinReset", now);
+  } else {
+    spinsLeft = savedSpins !== null ? Number(savedSpins) : DAILY_FREE_SPINS;
+  }
+}
+
+/* ==================== XỬ LÝ NHIỆM VỤ VƯỢT LINK4M ==================== */
+function checkVerifyCallback() {
+  let urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('verify') === 'link4m') {
+    spinsLeft += 1; // Cộng 1 lượt sau khi hoàn thành vượt link
+    localStorage.setItem("spinsLeft", spinsLeft);
+    showToast("🎉 Xác nhận thành công! Bạn nhận được +1 lượt random!");
+    
+    // Xóa query parameter khỏi URL cho đẹp
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}
+
+initSpins();
+checkVerifyCallback();
+
+/* ==================== ĐIỂM DANH HẰNG NGÀY ==================== */
+function checkDailyCheckinStatus() {
+  let lastCheckin = localStorage.getItem("lastCheckinDate");
+  let today = new Date().toDateString();
+  if (lastCheckin === today) {
+    document.getElementById("checkinText").innerText = "✅ Hôm nay bạn đã điểm danh rồi!";
+    document.getElementById("checkinBtn").style.display = "none";
+  }
+}
+function claimDailyCheckin() {
+  playSound('success');
+  let today = new Date().toDateString();
+  localStorage.setItem("lastCheckinDate", today);
+  spinsLeft += 1;
+  localStorage.setItem("spinsLeft", spinsLeft);
+  showToast("🎉 Điểm danh thành công! Bạn nhận thêm +1 lượt random!");
+  checkDailyCheckinStatus();
+  updateUI();
+}
+checkDailyCheckinStatus();
+
+function showToast(message) {
+  let toast = document.getElementById("toast");
+  toast.innerText = message;
+  toast.className = "show";
+  setTimeout(function(){ 
+    toast.className = toast.className.replace("show", ""); 
+  }, 3000);
+}
+
+function switchTab(evt, tabId) {
+  playSound('click');
+  let contents = document.getElementsByClassName("tab-content");
+  for (let i = 0; i < contents.length; i++) {
+    contents[i].classList.remove("active");
+  }
+
+  let buttons = document.getElementsByClassName("tab-btn");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove("active");
+  }
+
+  document.getElementById(tabId).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+
+/* ==================== KHO ACC ==================== */
+const defaultAccounts = [
+  {user:"Shin2xx2", pass:"123456789az"},
+  {user:"tranmychau4x", pass:"1100110a"},
+  {user:"bestpro08", pass:"9630621q"},
+  {user:"mudamudawrys", pass:"kocomk123"}
+];
+
+let savedAccounts = localStorage.getItem("remainingAccounts");
+let accounts = savedAccounts ? JSON.parse(savedAccounts) : [...defaultAccounts];
+let currentAcc = "";
+let isCooldown = false;
+
+updateUI();
+
+function randomAcc(){
+  if (isCooldown) return;
+
+  if (spinsLeft <= 0) {
+    showToast("⚠️ Bạn đã hết lượt random! Vui lòng vượt Link4M để lấy thêm.");
+    updateUI();
+    return;
+  }
+
+  playSound('click');
+  if (accounts.length === 0) {
+    showToast("⚠️ Đã hết tài khoản trong hệ thống!");
+    return;
+  }
+  
+  let randomIndex = Math.floor(Math.random() * accounts.length);
+  let acc = accounts.splice(randomIndex, 1)[0];
+
+  document.getElementById("user").innerHTML = "👤 Tài khoản: " + acc.user;
+  document.getElementById("pass").innerHTML = "🔑 Mật khẩu: " + acc.pass;
+  document.getElementById("result").style.display = "block";
+
+  currentAcc = "Tài khoản: " + acc.user + "\nMật khẩu: " + acc.pass;
+  
+  spinsLeft--;
+  localStorage.setItem("spinsLeft", spinsLeft);
+  localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
+  updateUI();
+
+  // Cooldown 5s giữa các lần bấm
+  isCooldown = true;
+  let timeLeft = 5;
+  let btn = document.getElementById("randomBtn");
+  btn.disabled = true;
+  btn.innerText = `⏳ Vui lòng đợi (${timeLeft}s)`;
+
+  let timer = setInterval(function() {
+    timeLeft--;
+    if (timeLeft > 0) {
+      btn.innerText = `⏳ Vui lòng đợi (${timeLeft}s)`;
+    } else {
+      clearInterval(timer);
+      isCooldown = false;
+      updateUI();
+    }
+  }, 1000);
+}
+
+function updateUI() {
+  document.getElementById("spinsLeft").innerText = spinsLeft;
+  document.getElementById("remaining").innerText = accounts.length;
+
+  let btnRandom = document.getElementById("randomBtn");
+  let btnLink4m = document.getElementById("link4mBtn");
+
+  // Thiết lập link4m khi bị ẩn nút random
+  btnLink4m.href = LINK4M_URL;
+
+  if (spinsLeft <= 0) {
+    btnRandom.style.display = "none";
+    btnLink4m.style.display = "block";
+  } else {
+    btnRandom.style.display = "block";
+    btnLink4m.style.display = "none";
+
+    if (!isCooldown) {
+      if (accounts.length === 0) {
+        btnRandom.disabled = true;
+        btnRandom.innerText = "❌ ĐÃ HẾT ACC";
+      } else {
+        btnRandom.disabled = false; 
+        btnRandom.innerText = "🎁 RANDOM ACC NGAY";
+      }
+    }
+  }
+}
+
+function copyAcc(){
+  if (!currentAcc) return;
+  playSound('success');
+  navigator.clipboard.writeText(currentAcc);
+  showToast("✅ Đã sao chép tài khoản thành công!");
+}
+
+function resetData() {
+  playSound('click');
+  if (confirm("Bạn có muốn nạp lại kho acc ban đầu không?")) {
+    accounts = [...defaultAccounts];
+    localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
+    document.getElementById("result").style.display = "none";
+    isCooldown = false;
+    updateUI();
+    showToast("✅ Đã khôi phục lại kho acc!");
+  }
+}
+
+function copyScript() {
+  playSound('success');
+  let scriptCode = document.getElementById("scriptText").innerText;
+  navigator.clipboard.writeText(scriptCode);
+  showToast("✅ Đã sao chép Script Fix Lag!");
+}
+</script>
+</body>
+</html>
