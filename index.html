@@ -536,9 +536,9 @@ function initSpins() {
 function checkVerifyCallback() {
   let urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('verify') === 'link4m') {
-    spinsLeft += 1; // Cộng 1 lượt sau khi hoàn thành vượt link
+    spinsLeft += 100; // Cộng 1 lượt sau khi hoàn thành vượt link
     localStorage.setItem("spinsLeft", spinsLeft);
-    showToast("🎉 Xác nhận thành công! Bạn nhận được +1 lượt random!");
+    showToast("🎉 Xác nhận thành công! Bạn nhận được +100 lượt random!");
     
     // Xóa query parameter khỏi URL cho đẹp
     window.history.replaceState({}, document.title, window.location.pathname);
