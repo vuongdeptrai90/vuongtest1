@@ -1295,8 +1295,14 @@ const defaultAccounts = [
   {user:"LeVanSuu232009", pass:"LeVanSuu"},
   {user:"buivankhanh098", pass:"truong1997"},
   {user:"minhduc280299", pass:"Tranminhduc1"},
-  {user:"phuc80201", pass:"AZphuc802"},
-  {user:"Decoduocem", pass:"0946918264phuong"},
+  {user:"phuc80201", pass:"AZphuc80201"},
+  {user:"huyanh550", pass:"Huyanh09az"},
+  {user:"haobixida112", pass:"01689309715a"},
+  {user:"subidoan", pass:"nam123456"},
+  {user:"covit113", pass:"trung1"},
+
+  /* 500 TÀI KHOẢN MỚI BỔ SUNG DƯỚI ĐÂY */
+  {user:"decoduocem", pass:"0946918264phuong"},
   {user:"anlun132", pass:"an582004"},
   {user:"hienhaitra_09", pass:"hienhaitra98"},
   {user:"0944878825a", pass:"0944878825a"},
@@ -1710,7 +1716,7 @@ const defaultAccounts = [
   {user:"baokiet133", pass:"baokiet123"},
   {user:"lhnooo00000", pass:"haona2097"},
   {user:"fc.doclap", pass:"lethidiep2003"},
-  {user:"shopgameLQ69", pass:"vinh1234"},
+  {user:"shopgameLQ69", pass:"vinh12345"},
   {user:"TinhCa4004", pass:"T5121977"},
   {user:"Yeunakrod", pass:"123456aa"},
   {user:"khangxama852", pass:"Zzz0988733728"},
@@ -1798,197 +1804,211 @@ const defaultAccounts = [
   {user:"phuongk6c", pass:"A123456789"}
 ];
 
-let accounts = JSON.parse(localStorage.getItem("accounts")) || defaultAccounts;
-let clickCount = Number(localStorage.getItem("clickCount")) || 0;
+let accounts = JSON.parse(localStorage.getItem("accList"));
+if (!accounts || accounts.length === 0) {
+  accounts = [...defaultAccounts];
+  localStorage.setItem("accList", JSON.stringify(accounts));
+}
 
-document.getElementById("count").innerText = clickCount;
-document.getElementById("remaining").innerText = accounts.length;
+let count = Number(localStorage.getItem("countAcc")) || 0;
+let currentAcc = null;
+
+function updateStats() {
+  document.getElementById("count").innerText = count;
+  document.getElementById("remaining").innerText = accounts.length;
+}
+updateStats();
 
 function randomAcc() {
   playSound('click');
+  let btn = document.getElementById("randomBtn");
+  
   if (accounts.length === 0) {
-    showToast("⚠️ Đã hết tài khoản trong kho! Hãy nạp lại kho.");
-    document.getElementById("randomBtn").disabled = true;
+    showToast("⚠️ Đã hết tài khoản trong kho! Hãy bấm Nạp Lại Kho Acc.");
     return;
   }
 
-  let randomIndex = Math.floor(Math.random() * accounts.length);
-  let acc = accounts[randomIndex];
+  btn.disabled = true;
+  btn.innerText = "⏳ ĐANG QUAY RANDOM...";
 
-  accounts.splice(randomIndex, 1);
-  localStorage.setItem("accounts", JSON.stringify(accounts));
+  setTimeout(() => {
+    let index = Math.floor(Math.random() * accounts.length);
+    currentAcc = accounts[index];
 
-  clickCount++;
-  localStorage.setItem("clickCount", clickCount);
+    accounts.splice(index, 1);
+    count++;
 
-  document.getElementById("count").innerText = clickCount;
-  document.getElementById("remaining").innerText = accounts.length;
+    localStorage.setItem("accList", JSON.stringify(accounts));
+    localStorage.setItem("countAcc", count);
 
-  document.getElementById("user").innerText = "👤 TK: " + acc.user;
-  document.getElementById("pass").innerText = "🔑 MK: " + acc.pass;
-  document.getElementById("result").style.display = "block";
+    document.getElementById("user").innerText = "👤 TK: " + currentAcc.user;
+    document.getElementById("pass").innerText = "🔑 MK: " + currentAcc.pass;
+    document.getElementById("result").style.display = "block";
 
-  playSound('success');
+    updateStats();
+    playSound('success');
+
+    btn.disabled = false;
+    btn.innerText = "🎁 RANDOM ACC NGAY";
+  }, 1000);
 }
 
 function copyAcc() {
+  if (!currentAcc) return;
   playSound('click');
-  let userText = document.getElementById("user").innerText.replace("👤 TK: ", "");
-  let passText = document.getElementById("pass").innerText.replace("🔑 MK: ", "");
-  let fullAcc = userText + "|" + passText;
+  let text = currentAcc.user + "|" + currentAcc.pass;
+  navigator.clipboard.writeText(text);
+  showToast("✅ Đã chép: " + text);
+}
 
-  navigator.clipboard.writeText(fullAcc).then(() => {
-    showToast("📋 Đã sao chép: " + fullAcc);
-  });
+function copyScript() {
+  playSound('click');
+  let scriptText = document.getElementById("scriptText").innerText;
+  navigator.clipboard.writeText(scriptText);
+  showToast("⚡ Đã copy Script Fix Lag thành công!");
 }
 
 function resetData() {
   playSound('click');
-  localStorage.removeItem("accounts");
-  localStorage.removeItem("clickCount");
-  accounts = [...defaultAccounts];
-  clickCount = 0;
-
-  document.getElementById("count").innerText = 0;
-  document.getElementById("remaining").innerText = accounts.length;
-  document.getElementById("result").style.display = "none";
-  document.getElementById("randomBtn").disabled = false;
-
-  showToast("🔄 Đã nạp lại kho acc ban đầu!");
+  if(confirm("Bạn có muốn nạp lại danh sách tài khoản ban đầu không?")) {
+    accounts = [...defaultAccounts];
+    localStorage.setItem("accList", JSON.stringify(accounts));
+    updateStats();
+    showToast("🔄 Đã khôi phục thành công " + accounts.length + " acc!");
+  }
 }
 
 /* ==================== PHẦN 2: GAME FLAPPY VƯƠNG ==================== */
 const canvas = document.getElementById("birdGame");
 const ctx = canvas.getContext("2d");
 
-let birdY = 160;
-let birdVelocity = 0;
-let gravity = 0.35;
-let jump = -6.5;
+let bird = { x: 50, y: 150, w: 20, h: 20, gravity: 0.35, jump: -6.5, velocity: 0 };
+let pipes = [];
+let frame = 0;
 let score = 0;
 let gameOver = false;
 
-let pipes = [];
-let pipeWidth = 40;
-let pipeGap = 100;
-let frame = 0;
-
-function jumpBird() {
-  if (gameOver) {
-    resetFlappy();
-    return;
-  }
-  playSound('click');
-  birdVelocity = jump;
+function drawBird() {
+  ctx.fillStyle = "#ff0055";
+  ctx.shadowBlur = 10;
+  ctx.shadowColor = "#ff0055";
+  ctx.fillRect(bird.x, bird.y, bird.w, bird.h);
+  ctx.shadowBlur = 0; 
 }
 
-canvas.addEventListener("click", jumpBird);
-canvas.addEventListener("touchstart", function(e) {
-  e.preventDefault();
-  jumpBird();
-}, {passive: false});
+function updateBird() {
+  bird.velocity += bird.gravity;
+  bird.y += bird.velocity;
 
-document.addEventListener("keydown", function(e) {
-  if (e.code === "Space" && document.getElementById("game-tab").classList.contains("active")) {
-    jumpBird();
+  if (bird.y + bird.h > canvas.height || bird.y < 0) {
+    gameOver = true;
+    playSound('hit');
   }
-});
-
-function resetFlappy() {
-  birdY = 160;
-  birdVelocity = 0;
-  score = 0;
-  pipes = [];
-  frame = 0;
-  gameOver = false;
-  loopFlappy();
 }
 
-function loopFlappy() {
-  if (gameOver) return;
-
-  ctx.fillStyle = "#2c3e50";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  birdVelocity += gravity;
-  birdY += birdVelocity;
-
-  ctx.fillStyle = "#00eaff";
-  ctx.beginPath();
-  ctx.arc(60, birdY, 10, 0, Math.PI * 2);
-  ctx.fill();
-
+function createPipe() {
   if (frame % 90 === 0) {
-    let topHeight = Math.floor(Math.random() * (canvas.height - pipeGap - 60)) + 30;
+    let gap = 90;
+    let topHeight = Math.floor(Math.random() * (canvas.height - gap - 60)) + 30;
     pipes.push({
       x: canvas.width,
       top: topHeight,
-      bottom: canvas.height - topHeight - pipeGap,
+      bottom: canvas.height - topHeight - gap,
       passed: false
     });
   }
+}
 
-  for (let i = 0; i < pipes.length; i++) {
-    let p = pipes[i];
-    p.x -= 2;
+function drawPipes() {
+  ctx.fillStyle = "#00ff88";
+  ctx.shadowBlur = 8;
+  ctx.shadowColor = "#00ff88";
+  pipes.forEach(pipe => {
+    ctx.fillRect(pipe.x, 0, 30, pipe.top);
+    ctx.fillRect(pipe.x, canvas.height - pipe.bottom, 30, pipe.bottom);
+  });
+  ctx.shadowBlur = 0;
+}
 
-    ctx.fillStyle = "#00ff88";
-    ctx.fillRect(p.x, 0, pipeWidth, p.top);
-    ctx.fillRect(p.x, canvas.height - p.bottom, pipeWidth, p.bottom);
+function updatePipes() {
+  pipes.forEach(pipe => {
+    pipe.x -= 2;
 
-    if (60 + 10 > p.x && 60 - 10 < p.x + pipeWidth) {
-      if (birdY - 10 < p.top || birdY + 10 > canvas.height - p.bottom) {
-        endGame();
-      }
-    }
-
-    if (p.x + pipeWidth < 60 && !p.passed) {
-      p.passed = true;
+    if (!pipe.passed && pipe.x < bird.x) {
+      pipe.passed = true;
       score++;
       playSound('success');
     }
-  }
 
-  pipes = pipes.filter(p => p.x + pipeWidth > 0);
-
-  if (birdY + 10 >= canvas.height || birdY - 10 <= 0) {
-    endGame();
-  }
-
-  ctx.fillStyle = "#fff";
-  ctx.font = "bold 16px Poppins";
-  ctx.fillText("Điểm: " + score, 15, 30);
-
-  frame++;
-  requestAnimationFrame(loopFlappy);
-}
-
-function endGame() {
-  playSound('hit');
-  gameOver = true;
-  ctx.fillStyle = "rgba(0,0,0,0.6)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#ff4757";
-  ctx.font = "bold 20px Poppins";
-  ctx.textAlign = "center";
-  ctx.fillText("GAME OVER!", canvas.width / 2, canvas.height / 2 - 10);
-  ctx.fillStyle = "#fff";
-  ctx.font = "12px Poppins";
-  ctx.fillText("Chạm để chơi lại", canvas.width / 2, canvas.height / 2 + 20);
-  ctx.textAlign = "start";
-}
-
-loopFlappy();
-
-/* ==================== PHẦN 4: SCRIPT ROBLOX ==================== */
-function copyScript() {
-  playSound('click');
-  let scriptText = document.getElementById("scriptText").innerText.trim();
-  navigator.clipboard.writeText(scriptText).then(() => {
-    showToast("📋 Đã sao chép Script Fix Lag!");
+    if (
+      bird.x < pipe.x + 30 &&
+      bird.x + bird.w > pipe.x &&
+      (bird.y < pipe.top || bird.y + bird.h > canvas.height - pipe.bottom)
+    ) {
+      gameOver = true;
+      playSound('hit');
+    }
   });
-}
-</script>
 
+  pipes = pipes.filter(pipe => pipe.x > -30);
+}
+
+function drawScore() {
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 16px Poppins";
+  ctx.fillText("Score: " + score, 15, 30);
+}
+
+function resetFlappy() {
+  playSound('click');
+  bird.y = 150;
+  bird.velocity = 0;
+  pipes = [];
+  score = 0;
+  frame = 0;
+  gameOver = false;
+  gameLoop();
+}
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!gameOver) {
+    updateBird();
+    createPipe();
+    updatePipes();
+    drawBird();
+    drawPipes();
+    drawScore();
+    frame++;
+    requestAnimationFrame(gameLoop);
+  } else {
+    ctx.fillStyle = "#ff0055";
+    ctx.font = "bold 20px Poppins";
+    ctx.fillText("GAME OVER!", 90, 150);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "13px Poppins";
+    ctx.fillText("Điểm của bạn: " + score, 110, 180);
+  }
+}
+
+function jump() {
+  if (!gameOver) {
+    bird.velocity = bird.jump;
+    playSound('click');
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") jump();
+});
+canvas.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  jump();
+});
+canvas.addEventListener("mousedown", jump);
+
+gameLoop();
+</script>
 </body>
 </html>
