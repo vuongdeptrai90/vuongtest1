@@ -4,173 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vương Hóng Hớt News</title>
+<title>Vương Hóng Hớt - Độ Nhạy FF</title>
 
 <style>
+
 *{
-margin:0;
-padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial;
 }
 
 body{
-background:#f1f1f1;
-color:#222;
-transition:.3s;
-}
-
-body.dark{
+margin:0;
 background:#111;
 color:white;
 }
 
 header{
-background:linear-gradient(90deg,#d60000,#ff5500);
-color:white;
+background:linear-gradient(90deg,#ff0000,#ff8800);
 padding:25px;
 text-align:center;
 }
 
-header h1{
-font-size:35px;
-}
-
-nav{
-background:#222;
-padding:15px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:10px;
-text-decoration:none;
-}
-
-.hot{
-background:#d60000;
-color:white;
-padding:10px;
-overflow:hidden;
-}
-
-.hot span{
-display:inline-block;
-animation:run 12s linear infinite;
-}
-
-@keyframes run{
-from{transform:translateX(100%);}
-to{transform:translateX(-100%);}
-}
-
-
 .container{
 width:90%;
-max-width:1200px;
+max-width:600px;
 margin:20px auto;
 }
 
-
-.search{
-display:flex;
-gap:10px;
+.box{
+background:#222;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
 }
 
-.search input{
-flex:1;
+select,button{
+width:100%;
 padding:12px;
-border-radius:8px;
-border:1px solid #aaa;
+margin-top:10px;
+border-radius:10px;
+border:0;
 }
-
 
 button{
-padding:10px 15px;
-border:0;
-border-radius:8px;
-background:#d60000;
+background:#ff4500;
 color:white;
+font-weight:bold;
 cursor:pointer;
 }
 
 
-.feature{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
-}
-
-.dark .feature,
-.dark .card{
-background:#222;
+.result{
+font-size:18px;
+line-height:35px;
 }
 
 
-.feature img{
-width:100%;
-border-radius:12px;
+.sen{
+background:#333;
+padding:10px;
+border-radius:8px;
+margin:8px 0;
 }
 
 
-.news{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
-margin-top:20px;
+.copy{
+background:#008cff;
 }
 
-
-.card{
-background:white;
-border-radius:15px;
-padding:15px;
-}
-
-
-.card img{
-width:100%;
-height:170px;
-object-fit:cover;
-border-radius:10px;
-}
-
-
-.card h3{
-margin:10px 0;
-}
-
-
-.tag{
-display:inline-block;
-background:#d60000;
-color:white;
-padding:5px 10px;
-border-radius:20px;
-font-size:13px;
-}
-
-
-footer{
-margin-top:30px;
-padding:20px;
-background:#222;
-color:white;
-text-align:center;
-}
-
-
-@media(max-width:600px){
-header h1{
-font-size:25px;
-}
-
-nav a{
-display:block;
-}
-}
 
 </style>
 
@@ -182,219 +83,198 @@ display:block;
 
 <header>
 
-<h1>📰 VƯƠNG HÓNG HỚT NEWS</h1>
+<h1>🔥 Vương Hóng Hớt FF</h1>
 
-<p>Cập nhật Game • Roblox • Liên Quân • Công Nghệ</p>
-
-<br>
-
-<button onclick="darkMode()">🌙 Dark Mode</button>
+<p>Tool tạo độ nhạy Free Fire tham khảo</p>
 
 </header>
-
-
-
-<nav>
-
-<a href="#">Trang chủ</a>
-<a href="#">Game</a>
-<a href="#">Roblox</a>
-<a href="#">Liên Quân</a>
-<a href="#">Drama</a>
-
-</nav>
-
-
-
-<div class="hot">
-
-<span>
-🔥 TIN NÓNG: Cập nhật những tin tức game mới nhất hôm nay - Vương Hóng Hớt News
-</span>
-
-</div>
-
 
 
 <div class="container">
 
 
-<div class="search">
+<div class="box">
 
-<input id="search" placeholder="🔎 Tìm kiếm bài viết..." onkeyup="searchPost()">
+<h2>⚙️ Tạo độ nhạy</h2>
+
+
+<label>Điện thoại</label>
+
+<select id="phone">
+
+<option>Redmi Note 12 Turbo</option>
+<option>iPhone</option>
+<option>Samsung</option>
+<option>OPPO</option>
+<option>Vivo</option>
+
+</select>
+
+
+
+<label>Phong cách</label>
+
+<select id="style">
+
+<option value="head">Kéo tâm đỏ</option>
+<option value="balance">Cân bằng</option>
+<option value="smooth">Mượt</option>
+
+</select>
+
+
+<button onclick="create()">🔥 Tạo độ nhạy</button>
+
 
 </div>
 
 
 
-<div class="feature">
+<div class="box result" id="result">
 
-<img src="https://picsum.photos/1000/500">
+Chưa có cấu hình
+
+</div>
 
 
-<h2>
-🔥 Roblox cập nhật bản update mới cực hot
-</h2>
-
-<p>
-Cộng đồng game thủ đang chú ý đến những thay đổi mới nhất.
-</p>
-
-<p>
-👁 Lượt xem: <b id="view"></b>
-</p>
-
-<button>
-Đọc bài viết
+<button class="copy" onclick="copyText()">
+📋 Sao chép độ nhạy
 </button>
 
 
+<div class="box">
+
+<h3>💾 Lịch sử</h3>
+
+<div id="history">
+Chưa có
 </div>
-
-
-
-
-<div class="news" id="posts">
-
-
-<div class="card">
-
-<img src="https://picsum.photos/400/250?1">
-
-<span class="tag">Roblox</span>
-
-<h3>
-Script Roblox mới giúp tối ưu trải nghiệm
-</h3>
-
-<p>
-Các mẹo giúp người chơi có trải nghiệm tốt hơn.
-</p>
-
-</div>
-
-
-
-
-<div class="card">
-
-<img src="https://picsum.photos/400/250?2">
-
-<span class="tag">Liên Quân</span>
-
-<h3>
-Top tướng đang được yêu thích
-</h3>
-
-<p>
-Cập nhật xu hướng cộng đồng game thủ.
-</p>
-
-</div>
-
-
-
-
-<div class="card">
-
-<img src="https://picsum.photos/400/250?3">
-
-<span class="tag">Công nghệ</span>
-
-<h3>
-Điện thoại gaming mới ra mắt
-</h3>
-
-<p>
-Những thiết bị mạnh dành cho game.
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<img src="https://picsum.photos/400/250?4">
-
-<span class="tag">Drama</span>
-
-<h3>
-Cộng đồng game đang bàn luận
-</h3>
-
-<p>
-Những câu chuyện nổi bật hôm nay.
-</p>
-
-</div>
-
-
 
 </div>
 
 
 </div>
-
-
-
-<footer>
-
-© 2026 Vương Hóng Hớt News
-<br>
-Website tin tức gaming
-
-</footer>
 
 
 
 <script>
 
 
-function darkMode(){
+let last="";
 
-document.body.classList.toggle("dark");
+
+function create(){
+
+
+let phone=document.getElementById("phone").value;
+
+let type=document.getElementById("style").value;
+
+
+let data;
+
+
+if(type=="head"){
+
+data={
+Tổng:200,
+RedDot:190,
+2x:180,
+4x:170,
+AWM:100,
+Nhìn:200
+};
 
 }
 
 
+else if(type=="balance"){
 
-let views=localStorage.getItem("views") || 0;
+data={
+Tổng:170,
+RedDot:160,
+2x:150,
+4x:140,
+AWM:90,
+Nhìn:170
+};
 
-views++;
-
-localStorage.setItem("views",views);
-
-document.getElementById("view").innerHTML=views;
-
-
-
-function searchPost(){
-
-let input=document
-.getElementById("search")
-.value
-.toLowerCase();
-
-
-let cards=document.querySelectorAll(".card");
-
-
-cards.forEach(card=>{
-
-let text=card.innerText.toLowerCase();
-
-if(text.includes(input)){
-card.style.display="block";
 }
+
+
 else{
-card.style.display="none";
+
+data={
+Tổng:150,
+RedDot:140,
+2x:130,
+4x:120,
+AWM:80,
+Nhìn:150
+};
+
 }
 
-});
+
+
+last=
+`📱 Máy: ${phone}
+
+🔥 Tổng: ${data.Tổng}
+🔴 Red Dot: ${data.RedDot}
+🔭 2X: ${data["2x"]}
+🔭 4X: ${data["4x"]}
+🎯 AWM: ${data.AWM}
+👁 Nhìn: ${data.Nhìn}`;
+
+
+
+document.getElementById("result").innerHTML=
+last.replace(/\n/g,"<br>");
+
+
+
+save();
 
 
 }
+
+
+
+function copyText(){
+
+navigator.clipboard.writeText(last);
+
+alert("Đã sao chép!");
+
+}
+
+
+
+function save(){
+
+let old=localStorage.getItem("ff")||"";
+
+localStorage.setItem("ff",last+"\n\n"+old);
+
+
+show();
+
+}
+
+
+
+function show(){
+
+let h=localStorage.getItem("ff")||"Chưa có";
+
+document.getElementById("history")
+.innerText=h.substring(0,500);
+
+}
+
+
+show();
 
 
 </script>
