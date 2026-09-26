@@ -548,7 +548,7 @@ if(localStorage.getItem("theme") === "purple") {
 }
 
 // Đếm lượt truy cập chung
-let totalVisits = Number(localStorage.getItem("totalVisits")) || 120;
+let totalVisits = Number(localStorage.getItem("totalVisits")) || 0;
 totalVisits++;
 localStorage.setItem("totalVisits", totalVisits);
 document.getElementById("totalVisits").innerText = totalVisits;
@@ -612,7 +612,7 @@ function loadAccountsFromRaw() {
     updateUI();
   } else {
     // Dán link Raw của file .json vào đây
-    fetch('')
+    fetch('https://raw.githubusercontent.com/vuongdeptrai90/vuongtest1/refs/heads/main/account.json')
       .then(response => response.json()) // Đọc dữ liệu trực tiếp dưới dạng JSON
       .then(data => {
         accounts = data; // Dữ liệu lấy về đã là mảng các đối tượng user/pass
