@@ -629,31 +629,38 @@ function updateUI() {
   if (!isCooldown) {  
     if (accounts.length === 0) {  
       btn.disabled = true;  
-/* ==================== PHẦN 1: RANDOM ACC (DÙNG JSON RAW) ==================== */
+/* ==================== PHẦN 1: RANDOM ACC (DÙNG LINK RAW) ==================== */
 let accounts = [];
 let currentAcc = "";
 let count = Number(localStorage.getItem("count")) || 0;
 let isCooldown = false;
 
-// Hàm tải danh sách từ link Raw GitHub (File JSON)
+// Hàm tải danh sách từ link Raw GitHub
 function loadAccountsFromRaw() {
   let savedAccounts = localStorage.getItem("remainingAccounts");
   if (savedAccounts) {
     accounts = JSON.parse(savedAccounts);
     updateUI();
   } else {
-    // Dán link Raw của file .json vào đây
-    fetch('https://raw.githubusercontent.com/vuongdeptrai90/vuongtest1/refs/heads/main/account.json')
-      .then(response => response.json()) // Đọc dữ liệu trực tiếp dưới dạng JSON
+    // Dán link Raw của file .txt vào đây (Ví dụ: định dạng user|pass mỗi dòng)
+    fetch('ĐIỀN_LINK_RAW_CỦA_BẠN_VÀO_ĐÂY')
+      .then(response => response.text())
       .then(data => {
-        accounts = data; // Dữ liệu lấy về đã là mảng các đối tượng user/pass
+        let lines = data.split('\n');
+        accounts = lines.map(line => {
+          let parts = line.trim().split('|');
+          if (parts.length >= 2) {
+            return { user: parts[0], pass: parts[1] };
+          }
+          return null;
+        }).filter(acc => acc !== null);
 
         localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
         updateUI();
       })
       .catch(error => {
         console.error("Lỗi tải kho acc:", error);
-        showToast("⚠️ Không thể tải danh sách tài khoản từ JSON!");
+        showToast("⚠️ Không thể tải danh sách tài khoản!");
       });
   }
 }
@@ -735,6 +742,33 @@ function resetData() {
     showToast("✅ Đã khôi phục lại kho acc!");
   }
 }
+         
+
+// Gọi hàm tải acc khi vừa vào trang
+loadAccountsFromRaw();
+
+function randomAcc(){
+  if (isCooldown) return;
+  playSound('click');
+  if (accounts.length === 0) {
+    showToast("⚠️ Đã hết tài khoản trong hệ thống!");
+    return;
+  }
+  
+  let randomIndex = Math.floor(Math.random() * accounts.length);
+  let acc = accounts.splice(randomIndex, 1)[0];
+
+  document.getElementById("user").innerHTML = "👤 Tài khoản: " + acc.user;
+  document.getElementById("pass").innerHTML = "🔑 Mật khẩu: " + acc.pass;
+  document.getElementById("result").style.display = "block";
+
+  currentAcc = "Tài khoản: " + acc.user + "\nMật khẩu: " + acc.pass;
+  count++;
+  
+  localStorage.setItem("count", count);
+  localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
+  updateUI();
+     
   
   
 /* ==================== COPY SCRIPT ROBLOX ==================== */  
