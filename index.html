@@ -629,31 +629,112 @@ function updateUI() {
   if (!isCooldown) {  
     if (accounts.length === 0) {  
       btn.disabled = true;  
-      btn.innerText = "❌ ĐÃ HẾT ACC";  
-    } else {  
-      btn.disabled = false;   
-      btn.innerText = "🎁 RANDOM ACC NGAY";  
-    }  
-  }  
-}  
+/* ==================== PHẦN 1: RANDOM ACC (DÙNG JSON RAW) ==================== */
+let accounts = [];
+let currentAcc = "";
+let count = Number(localStorage.getItem("count")) || 0;
+let isCooldown = false;
+
+// Hàm tải danh sách từ link Raw GitHub (File JSON)
+function loadAccountsFromRaw() {
+  let savedAccounts = localStorage.getItem("remainingAccounts");
+  if (savedAccounts) {
+    accounts = JSON.parse(savedAccounts);
+    updateUI();
+  } else {
+    // Dán link Raw của file .json vào đây
+    fetch('ĐIỀN_LINK_RAW_FILE_JSON_CỦA_BẠN_VÀO_ĐÂY')
+      .then(response => response.json()) // Đọc dữ liệu trực tiếp dưới dạng JSON
+      .then(data => {
+        accounts = data; // Dữ liệu lấy về đã là mảng các đối tượng user/pass
+
+        localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
+        updateUI();
+      })
+      .catch(error => {
+        console.error("Lỗi tải kho acc:", error);
+        showToast("⚠️ Không thể tải danh sách tài khoản từ JSON!");
+      });
+  }
+}
+
+// Gọi hàm tải acc khi vừa vào trang
+loadAccountsFromRaw();
+
+function randomAcc(){
+  if (isCooldown) return;
+  playSound('click');
+  if (accounts.length === 0) {
+    showToast("⚠️ Đã hết tài khoản trong hệ thống!");
+    return;
+  }
   
-function copyAcc(){  
-  if (!currentAcc) return;  
-  playSound('success');  
-  navigator.clipboard.writeText(currentAcc);  
-  showToast("✅ Đã sao chép tài khoản thành công!");  
-}  
+  let randomIndex = Math.floor(Math.random() * accounts.length);
+  let acc = accounts.splice(randomIndex, 1)[0];
+
+  document.getElementById("user").innerHTML = "👤 Tài khoản: " + acc.user;
+  document.getElementById("pass").innerHTML = "🔑 Mật khẩu: " + acc.pass;
+  document.getElementById("result").style.display = "block";
+
+  currentAcc = "Tài khoản: " + acc.user + "\nMật khẩu: " + acc.pass;
+  count++;
   
-function resetData() {  
-  playSound('click');  
-  if (confirm("Bạn có muốn nạp lại kho acc ban đầu không?")) {  
-    localStorage.removeItem("remainingAccounts");  
-    document.getElementById("result").style.display = "none";  
-    isCooldown = false;  
-    loadAccountsFromRaw(); // Tải lại từ đầu  
-    showToast("✅ Đã khôi phục lại kho acc!");  
-  }  
-}  
+  localStorage.setItem("count", count);
+  localStorage.setItem("remainingAccounts", JSON.stringify(accounts));
+  updateUI();
+
+  // Bắt đầu thời gian chờ 10 giây
+  isCooldown = true;
+  let timeLeft = 10;
+  let btn = document.getElementById("randomBtn");
+  btn.disabled = true;
+  btn.innerText = `⏳ Vui lòng đợi (${timeLeft}s)`;
+
+  let timer = setInterval(function() {
+    timeLeft--;
+    if (timeLeft > 0) {
+      btn.innerText = `⏳ Vui lòng đợi (${timeLeft}s)`;
+    } else {
+      clearInterval(timer);
+      isCooldown = false;
+      updateUI();
+    }
+  }, 1000);
+}
+
+function updateUI() {
+  document.getElementById("count").innerHTML = count;
+  document.getElementById("remaining").innerHTML = accounts.length;
+
+  let btn = document.getElementById("randomBtn");
+  if (!isCooldown) {
+    if (accounts.length === 0) {
+      btn.disabled = true;
+      btn.innerText = "❌ ĐÃ HẾT ACC";
+    } else {
+      btn.disabled = false; 
+      btn.innerText = "🎁 RANDOM ACC NGAY";
+    }
+  }
+}
+
+function copyAcc(){
+  if (!currentAcc) return;
+  playSound('success');
+  navigator.clipboard.writeText(currentAcc);
+  showToast("✅ Đã sao chép tài khoản thành công!");
+}
+
+function resetData() {
+  playSound('click');
+  if (confirm("Bạn có muốn nạp lại kho acc ban đầu không?")) {
+    localStorage.removeItem("remainingAccounts");
+    document.getElementById("result").style.display = "none";
+    isCooldown = false;
+    loadAccountsFromRaw(); // Tải lại từ đầu
+    showToast("✅ Đã khôi phục lại kho acc!");
+  }
+}
   
   
 /* ==================== COPY SCRIPT ROBLOX ==================== */  
